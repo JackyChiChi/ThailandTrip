@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>泰國芭達雅+曼谷之旅 | 6/18-6/23</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --thai-gold: #FFD700;
+            --thai-orange: #FF8C42;
+            --thai-red: #DC143C;
+            --thai-green: #228B22;
+            --thai-blue: #4169E1;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --shadow-warm: rgba(255, 140, 66, 0.15);
+            --text-dark: #2C1810;
+            --text-medium: #5D4E37;
+            --gradient-sunset: linear-gradient(135deg, var(--thai-orange), var(--thai-red));
+            --gradient-ocean: linear-gradient(135deg, var(--thai-blue), var(--thai-green));
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .page-header {
+            background: var(--gradient-sunset);
+            padding: 2rem 1rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="90" cy="10" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="10" cy="60" r="1.5" fill="rgba(255,255,255,0.1)"/><circle cx="60" cy="30" r="1" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(180deg); }
+        }
+
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 0.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .countdown-weather {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            position: relative;
+            z-index: 1;
+            flex-wrap: wrap;
+        }
+
+        .countdown-box, .weather-box {
+            background: rgba(255,255,255,0.2);
+            padding: 1rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.3);
+            min-width: 150px;
+        }
+
+        .countdown-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .countdown-label, .weather-label {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid var(--thai-orange);
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: 500;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-sunset);
+            transition: left 0.3s ease;
+            z-index: 0;
+        }
+
+        .tab.active::before, .tab:hover::before {
+            left: 0;
+        }
+
+        .tab.active, .tab:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px var(--shadow-warm);
+        }
+
+        .tab span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .day-content {
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .day-content.active {
+            display: block;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .day-overview {
+            background: white;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+            border: 1px solid rgba(255, 140, 66, 0.2);
+        }
+
+        .activities {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .activity {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 5px solid var(--thai-orange);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .activity:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .activity-header {
+            display: flex;
+            justify-content: between;
+            align-items: start;
+            margin-bottom: 1rem;
+            gap: 1rem;
+        }
+
+        .activity-time {
+            font-weight: 600;
+            color: var(--thai-red);
+            font-size: 1.1rem;
+            min-width: fit-content;
+        }
+
+        .activity-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+            flex-grow: 1;
+        }
+
+        .activity-location {
+            color: var(--text-medium);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .options {
+            margin-top: 1rem;
+        }
+
+        .option {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 0.75rem;
+            padding: 0.75rem;
+            background: var(--soft-cream);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+
+        .option:hover {
+            background: rgba(255, 140, 66, 0.1);
+            transform: translateX(3px);
+        }
+
+        .option input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--thai-orange);
+            cursor: pointer;
+        }
+
+        .option.completed {
+            background: rgba(34, 139, 34, 0.1);
+            border-left: 3px solid var(--thai-green);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background: var(--gradient-sunset);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: var(--gradient-ocean);
+            color: white;
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--thai-orange);
+            border: 2px solid var(--thai-orange);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .photos-section {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .photos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .photo-upload {
+            border: 2px dashed var(--thai-orange);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: var(--soft-cream);
+        }
+
+        .photo-upload:hover {
+            border-color: var(--thai-red);
+            background: rgba(255, 140, 66, 0.1);
+        }
+
+        .photo-item {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 1;
+        }
+
+        .photo-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .close {
+            float: right;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-medium);
+        }
+
+        .weather-info {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .weather-icon {
+            font-size: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .countdown-weather {
+                gap: 1rem;
+            }
+            
+            .activity-header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .action-buttons {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <h1 class="title">🇹🇭 泰國芭達雅+曼谷之旅</h1>
+        <p class="subtitle">2024年6月18日 - 6月23日 | 6天5夜精彩行程</p>
+        
+        <div class="countdown-weather">
+            <div class="countdown-box">
+                <div class="countdown-number" id="countdown-days">0</div>
+                <div class="countdown-label">天後出發</div>
+            </div>
+            
+            <div class="weather-box">
+                <div class="weather-info">
+                    <span class="weather-icon">🌤️</span>
+                    <div>
+                        <div class="countdown-number">32°C</div>
+                        <div class="weather-label">芭達雅天氣</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" data-day="day1"><span>6/18 芭達雅</span></div>
+            <div class="tab" data-day="day2"><span>6/19 芭達雅</span></div>
+            <div class="tab" data-day="day3"><span>6/20 芭達雅→曼谷</span></div>
+            <div class="tab" data-day="day4"><span>6/21 曼谷</span></div>
+            <div class="tab" data-day="day5"><span>6/22 曼谷</span></div>
+            <div class="tab" data-day="day6"><span>6/23 返台</span></div>
+        </div>
+
+        <!-- Day 1: 6/18 芭達雅 -->
+        <div class="day-content active" id="day1">
+            <div class="day-overview">
+                <h2>🌅 第一天：抵達芭達雅</h2>
+                <p>CI 331 班機 9:25 出發，12:10 抵達。機場到芭達雅，享受飛機餐後開始精彩旅程！</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">9:25 - 12:10</div>
+                        <div>
+                            <div class="activity-title">CI 331 班機</div>
+                            <div class="activity-location">📍 台北 → 芭達雅</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="flight-checkin">
+                            <label for="flight-checkin">完成線上報到</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="flight-meal">
+                            <label for="flight-meal">飛機餐：BKK機場→芭達雅</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Suvarnabhumi Airport')">📍 查看地圖</button>
+                        <button class="btn btn-outline" onclick="openDetails('flight')">✈️ 航班詳情</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">下午</div>
+                        <div>
+                            <div class="activity-title">BKK機場到芭達雅</div>
+                            <div class="activity-location">📍 機場接送或自行前往</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="transport-option">
+                            <label for="transport-option">確認交通方式（預約Terminal 21 Pattaya暫定Terminal 21 Pattaya海邊購物）</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" onclick="openMap('Terminal 21 Pattaya')">🗺️ 前往購物中心</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">晚上</div>
+                        <div>
+                            <div class="activity-title">晚餐 & 自由活動</div>
+                            <div class="activity-location">📍 芭達雅市區</div>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Pattaya Beach')">🏖️ 芭達雅海灘</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h3>📸 今日照片</h3>
+                <div class="photos-grid" id="day1-photos">
+                    <div class="photo-upload" onclick="uploadPhoto('day1')">
+                        <div>📷</div>
+                        <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 2: 6/19 芭達雅 -->
+        <div class="day-content" id="day2">
+            <div class="day-overview">
+                <h2>🏝️ 第二天：芭達雅精彩一日遊</h2>
+                <p>暫定Terminal 21 Pattaya行程，可選擇海邊活動、購物或按摩放鬆</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">上午</div>
+                        <div>
+                            <div class="activity-title">Terminal 21 Pattaya 購物</div>
+                            <div class="activity-location">📍 Terminal 21 Pattaya</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="shopping-terminal21">
+                            <label for="shopping-terminal21">Terminal 21 購物</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="food-court">
+                            <label for="food-court">美食街用餐</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Pattaya')">🏬 查看位置</button>
+                        <button class="btn btn-outline" onclick="openDetails('terminal21')">🛍️ 購物攻略</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">下午</div>
+                        <div>
+                            <div class="activity-title">多元選擇活動</div>
+                            <div class="activity-location">📍 依選項而定</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="beach-activity">
+                            <label for="beach-activity">海邊活動或按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="water-sport">
+                            <label for="water-sport">或水上活動</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="spa-massage">
+                            <label for="spa-massage">或按摩 SPA</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-secondary" onclick="openMap('Pattaya Beach')">🏖️ 海灘位置</button>
+                        <button class="btn btn-outline" onclick="openDetails('activities')">🎯 活動推薦</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h3>📸 今日照片</h3>
+                <div class="photos-grid" id="day2-photos">
+                    <div class="photo-upload" onclick="uploadPhoto('day2')">
+                        <div>📷</div>
+                        <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 3: 6/20 芭達雅→曼谷 -->
+        <div class="day-content" id="day3">
+            <div class="day-overview">
+                <h2>🚌 第三天：芭達雅→曼谷，Circuit Festival</h2>
+                <p>白天多元活動選擇，晚上Circuit Festival Asia 2026派對</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">12點結房</div>
+                        <div>
+                            <div class="activity-title">多元活動選擇</div>
+                            <div class="activity-location">📍 芭達雅各景點</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="temple-visit">
+                            <label for="temple-visit">Option 1: Jerry 聲谷巴司馬喇嘛，來拉瑪力大學食一條街 都王角 + ICONSIAM</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="shopping-option2">
+                            <label for="shopping-option2">Option 2: 洽圖洽假日市場</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="pool-option">
+                            <label for="pool-option">Option 3: 飯店泳池 or 按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="university-food">
+                            <label for="university-food">來拉瑪力大學夜市（來拉美食一條街）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="night-market">
+                            <label for="night-market">Jodd Fairs (高速夜市)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="asiatique">
+                            <label for="asiatique">Asiatique 河濱碼頭夜市 (有摩天輪)</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('ICONSIAM Bangkok')">🏬 ICONSIAM</button>
+                        <button class="btn btn-secondary" onclick="openMap('Chatuchak Market')">🛍️ 洽圖洽市場</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">2:30 PM - 6 PM</div>
+                        <div>
+                            <div class="activity-title">Circuit Festival Asia 2026</div>
+                            <div class="activity-location">📍 The Zign Pool</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="circuit-festival">
+                            <label for="circuit-festival">參加 Circuit Festival</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openDetails('circuit')">🎉 Festival 詳情</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">6 PM - 9 PM</div>
+                        <div>
+                            <div class="activity-title">Circuit Festival Private Beach</div>
+                            <div class="activity-location">📍 The Zign Private Beach</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="private-beach">
+                            <label for="private-beach">私人海灘派對</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h3>📸 今日照片</h3>
+                <div class="photos-grid" id="day3-photos">
+                    <div class="photo-upload" onclick="uploadPhoto('day3')">
+                        <div>📷</div>
+                        <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 4: 6/21 曼谷 -->
+        <div class="day-content" id="day4">
+            <div class="day-overview">
+                <h2>🏛️ 第四天：曼谷文化與美食</h2>
+                <p>多種方案選擇，包括Silom出街、商場購物、建興酒家用餐等</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">白天</div>
+                        <div>
+                            <div class="activity-title">多元遊覽選擇</div>
+                            <div class="activity-location">📍 曼谷各區</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="silom-option1">
+                            <label for="silom-option1">Option 1 (出街推薦): 空身公司出街 Dust Central Park (Silom)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="shopping-option2-day4">
+                            <label for="shopping-option2-day4">Option 2: 飯店泳池或水療館 or 按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="temple-option3">
+                            <label for="temple-option3">Option 3: 暹羅自然錄 or 按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="shopping-option4">
+                            <label for="shopping-option4">Option 4: 錢多一日新 建興酒家</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Silom Bangkok')">🏙️ Silom 區域</button>
+                        <button class="btn btn-secondary" onclick="openDetails('bangkok-options')">🎯 曼谷選項</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">晚上</div>
+                        <div>
+                            <div class="activity-title">精彩夜生活與美食</div>
+                            <div class="activity-location">📍 依選項而定</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="nextopia">
+                            <label for="nextopia">Option 1 (出街推薦): Siam Paragon 「未來夢都市 NEXTOPIA」</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="lumphini">
+                            <label for="lumphini">Option 2 (街坊推薦): Lumphini Park (沒巨蟒)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="siam-option3">
+                            <label for="siam-option3">Option 3 (初訪推薦)</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="big-c">
+                            <label for="big-c">Option 4: Big C採購</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="song-wat">
+                            <label for="song-wat">Option 5 (文青): 高處克音樂 Song Wat</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Siam Paragon')">🏬 Siam Paragon</button>
+                        <button class="btn btn-outline" onclick="openMap('Lumphini Park')">🌳 Lumphini Park</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h3>📸 今日照片</h3>
+                <div class="photos-grid" id="day4-photos">
+                    <div class="photo-upload" onclick="uploadPhoto('day4')">
+                        <div>📷</div>
+                        <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 5: 6/22 曼谷 -->
+        <div class="day-content" id="day5">
+            <div class="day-overview">
+                <h2>🛍️ 第五天：曼谷最後購物</h2>
+                <p>最後一天自由活動，暹羅自然錄、按摩、飯店設施或機場前往</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">上午至下午</div>
+                        <div>
+                            <div class="activity-title">最後自由活動</div>
+                            <div class="activity-location">📍 曼谷市區</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="siam-natural">
+                            <label for="siam-natural">暹羅自然錄 or 按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="hotel-facilities">
+                            <label for="hotel-facilities">或飯店泳池/水療館 or 按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="terminal21-bangkok">
+                            <label for="terminal21-bangkok">Terminal 21 曼谷站前 or 按摩</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="airport-early">
+                            <label for="airport-early">或早點前往機場</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Bangkok')">🚉 Terminal 21 Asok</button>
+                        <button class="btn btn-outline" onclick="openDetails('last-day')">📋 最後一天建議</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">14:00 - 機場</div>
+                        <div>
+                            <div class="activity-title">前往機場與精選購物</div>
+                            <div class="activity-location">📍 素萬那普國際機場</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="airport-shopping">
+                            <label for="airport-shopping">機場免稅店購物</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="souvenirs">
+                            <label for="souvenirs">最後紀念品採購</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h3>📸 今日照片</h3>
+                <div class="photos-grid" id="day5-photos">
+                    <div class="photo-upload" onclick="uploadPhoto('day5')">
+                        <div>📷</div>
+                        <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Day 6: 6/23 返台 -->
+        <div class="day-content" id="day6">
+            <div class="day-overview">
+                <h2>✈️ 第六天：返台</h2>
+                <p>CI 836 班機 17:30 起飛，22:05 抵達台北，帶著滿滿回憶回家</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">CI 836</div>
+                        <div>
+                            <div class="activity-title">返台班機</div>
+                            <div class="activity-location">📍 17:30 → 22:05</div>
+                        </div>
+                    </div>
+                    
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="return-checkin">
+                            <label for="return-checkin">完成回程報到</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="final-photos">
+                            <label for="final-photos">機場最後合照</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="safe-arrival">
+                            <label for="safe-arrival">安全抵達台灣</label>
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openDetails('return-flight')">✈️ 班機資訊</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="photos-section">
+                <h3>📸 今日照片</h3>
+                <div class="photos-grid" id="day6-photos">
+                    <div class="photo-upload" onclick="uploadPhoto('day6')">
+                        <div>📷</div>
+                        <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for details -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- Hidden file input for photo upload -->
+    <input type="file" id="photoInput" accept="image/*" multiple style="display: none;" onchange="handlePhotoUpload(this)">
+
+    <script>
+        // 初始化
+        let currentUploadDay = '';
+        let tripData = JSON.parse(localStorage.getItem('thailandTrip')) || {
+            photos: {},
+            completed: {},
+            notes: {}
+        };
+
+        // 倒數計時
+        function updateCountdown() {
+            const tripDate = new Date('2024-06-18T09:25:00');
+            const now = new Date();
+            const timeDiff = tripDate - now;
+            
+            if (timeDiff > 0) {
+                const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                document.getElementById('countdown-days').textContent = days;
+            } else {
+                document.getElementById('countdown-days').textContent = '0';
+                document.querySelector('.countdown-label').textContent = '旅行進行中';
+            }
+        }
+
+        // Tab 切換
+        function switchTab(dayId) {
+            // 隱藏所有內容
+            document.querySelectorAll('.day-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            // 移除所有 tab 的 active 類
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // 顯示選中的內容
+            document.getElementById(dayId).classList.add('active');
+            document.querySelector(`[data-day="${dayId}"]`).classList.add('active');
+        }
+
+        // 儲存資料
+        function saveData() {
+            localStorage.setItem('thailandTrip', JSON.stringify(tripData));
+        }
+
+        // 載入已完成的項目
+        function loadCompletedItems() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                if (tripData.completed[checkbox.id]) {
+                    checkbox.checked = true;
+                    checkbox.closest('.option').classList.add('completed');
+                }
+            });
+        }
+
+        // 處理核取方塊
+        function setupCheckboxes() {
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    tripData.completed[this.id] = this.checked;
+                    
+                    if (this.checked) {
+                        this.closest('.option').classList.add('completed');
+                    } else {
+                        this.closest('.option').classList.remove('completed');
+                    }
+                    
+                    saveData();
+                });
+            });
+        }
+
+        // 照片上傳
+        function uploadPhoto(dayId) {
+            currentUploadDay = dayId;
+            document.getElementById('photoInput').click();
+        }
+
+        function handlePhotoUpload(input) {
+            if (input.files && input.files.length > 0) {
+                const files = Array.from(input.files);
+                
+                if (!tripData.photos[currentUploadDay]) {
+                    tripData.photos[currentUploadDay] = [];
+                }
+                
+                files.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        const photoData = {
+                            src: e.target.result,
+                            name: file.name,
+                            timestamp: new Date().toISOString()
+                        };
+                        
+                        tripData.photos[currentUploadDay].push(photoData);
+                        saveData();
+                        renderPhotos(currentUploadDay);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        // 渲染照片
+        function renderPhotos(dayId) {
+            const photosGrid = document.getElementById(`${dayId}-photos`);
+            const uploadButton = photosGrid.querySelector('.photo-upload');
+            
+            // 清除現有照片（保留上傳按鈕）
+            photosGrid.innerHTML = '';
+            photosGrid.appendChild(uploadButton);
+            
+            if (tripData.photos[dayId]) {
+                tripData.photos[dayId].forEach((photo, index) => {
+                    const photoItem = document.createElement('div');
+                    photoItem.className = 'photo-item';
+                    photoItem.innerHTML = `
+                        <img src="${photo.src}" alt="${photo.name}" onclick="viewPhoto('${dayId}', ${index})">
+                        <div style="position: absolute; top: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; border-radius: 50%; width: 25px; height: 25px; display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 14px;" onclick="deletePhoto('${dayId}', ${index})">×</div>
+                    `;
+                    photosGrid.appendChild(photoItem);
+                });
+            }
+        }
+
+        // 查看照片
+        function viewPhoto(dayId, index) {
+            const photo = tripData.photos[dayId][index];
+            const modal = document.getElementById('detailModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            modalContent.innerHTML = `
+                <h3>${photo.name}</h3>
+                <img src="${photo.src}" style="width: 100%; border-radius: 10px; margin: 1rem 0;">
+                <p>拍攝時間: ${new Date(photo.timestamp).toLocaleString('zh-TW')}</p>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        // 刪除照片
+        function deletePhoto(dayId, index) {
+            if (confirm('確定要刪除這張照片嗎？')) {
+                tripData.photos[dayId].splice(index, 1);
+                saveData();
+                renderPhotos(dayId);
+            }
+        }
+
+        // 開啟地圖
+        function openMap(location) {
+            const encodedLocation = encodeURIComponent(location);
+            window.open(`https://www.google.com/maps/search/${encodedLocation}`, '_blank');
+        }
+
+        // 開啟詳情
+        function openDetails(type) {
+            const modal = document.getElementById('detailModal');
+            const modalContent = document.getElementById('modalContent');
+            
+            const details = {
+                'flight': `
+                    <h3>✈️ 航班資訊</h3>
+                    <p><strong>去程:</strong> CI 331<br>
+                    台北 09:25 → 芭達雅 12:10</p>
+                    <p><strong>回程:</strong> CI 836<br>
+                    曼谷 17:30 → 台北 22:05</p>
+                    <p><strong>注意事項:</strong><br>
+                    • 請提前2-3小時抵達機場<br>
+                    • 確認護照效期<br>
+                    • 預辦登機服務</p>
+                `,
+                'terminal21': `
+                    <h3>🏬 Terminal 21 Pattaya</h3>
+                    <p><strong>地址:</strong> 456/22 Pattaya Beach Rd, Pattaya City</p>
+                    <p><strong>營業時間:</strong> 10:00-22:00</p>
+                    <p><strong>特色:</strong><br>
+                    • 機場主題購物中心<br>
+                    • 各國城市主題樓層<br>
+                    • 美食街選擇豐富<br>
+                    • 海景景觀餐廳</p>
+                `,
+                'circuit': `
+                    <h3>🎉 Circuit Festival Asia 2026</h3>
+                    <p><strong>時間:</strong> 2:30 PM - 6:00 PM (Pool Party)<br>
+                    6:00 PM - 9:00 PM (Private Beach)</p>
+                    <p><strong>地點:</strong> The Zign Pool & Private Beach</p>
+                    <p><strong>注意事項:</strong><br>
+                    • 記得攜帶泳裝<br>
+                    • 防曬用品<br>
+                    • 充足的水分補充</p>
+                `,
+                'return-flight': `
+                    <h3>✈️ 回程班機 CI 836</h3>
+                    <p><strong>起飛:</strong> 17:30 (曼谷時間)</p>
+                    <p><strong>抵達:</strong> 22:05 (台北時間)</p>
+                    <p><strong>建議時程:</strong><br>
+                    • 14:00 抵達機場<br>
+                    • 15:00 完成報到及安檢<br>
+                    • 15:30-17:00 免稅店購物<br>
+                    • 17:00 前往登機口</p>
+                `
+            };
+            
+            modalContent.innerHTML = details[type] || '<p>詳細資訊準備中...</p>';
+            modal.classList.add('active');
+        }
+
+        // 關閉模態框
+        function closeModal() {
+            document.getElementById('detailModal').classList.remove('active');
+        }
+
+        // 事件監聽器
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tab 切換事件
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const dayId = this.dataset.day;
+                    switchTab(dayId);
+                });
+            });
+            
+            // 模態框點擊外部關閉
+            document.getElementById('detailModal').addEventListener('click', function(e) {
+                if (e.target === this) {
+                    closeModal();
+                }
+            });
+            
+            // 初始化
+            updateCountdown();
+            setupCheckboxes();
+            loadCompletedItems();
+            
+            // 載入所有天的照片
+            ['day1', 'day2', 'day3', 'day4', 'day5', 'day6'].forEach(dayId => {
+                renderPhotos(dayId);
+            });
+            
+            // 每分鐘更新倒數計時
+            setInterval(updateCountdown, 60000);
+        });
+    </script>
+</body>
+</html>
