@@ -404,6 +404,41 @@
             font-size: 1.5rem;
         }
 
+        .status-badge {
+            display: inline-block;
+            padding: 0.2rem 0.65rem;
+            border-radius: 12px;
+            font-size: 0.72rem;
+            font-weight: 500;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+        .status-waiting { background: #2e7d32; color: white; }
+        .status-need { background: #c62828; color: white; }
+        .status-booked { background: #a5d6a7; color: #1b5e20; }
+        .status-onsite { background: #ffcc80; color: #5d4037; }
+        .status-optional { background: #ffe0b2; color: #6d4c41; }
+        .status-adult { background: #dcedc8; color: #33691e; margin-left: 0.3rem; }
+
+        .type-tag {
+            display: inline-block;
+            padding: 0.15rem 0.55rem;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            color: white;
+            vertical-align: middle;
+        }
+        .type-transport { background: #5c6bc0; }
+        .type-meal { background: #f9a825; color: #3e2723; }
+        .type-hotel { background: #1976d2; }
+        .type-free { background: #424242; }
+        .type-spot { background: #00897b; }
+        .type-book { background: #ec407a; color: white; }
+        .type-bar { background: #6d4c41; }
+
         @media (max-width: 768px) {
             .title {
                 font-size: 2rem;
@@ -427,7 +462,7 @@
 <body>
     <header class="page-header">
         <h1 class="title">🇹🇭 泰國芭達雅+曼谷之旅</h1>
-        <p class="subtitle">2024年6月18日 - 6月23日 | 6天5夜精彩行程</p>
+        <p class="subtitle">2026年6月18日 - 6月23日 | 6天5夜精彩行程</p>
         
         <div class="countdown-weather">
             <div class="countdown-box">
@@ -449,19 +484,20 @@
 
     <div class="container">
         <div class="tabs">
-            <div class="tab active" data-day="day1"><span>6/18 芭達雅</span></div>
+            <div class="tab active" data-day="notes"><span>📋 注意事項</span></div>
+            <div class="tab" data-day="day1"><span>6/18 芭達雅</span></div>
             <div class="tab" data-day="day2"><span>6/19 芭達雅</span></div>
-            <div class="tab" data-day="day3"><span>6/20 芭達雅→曼谷</span></div>
-            <div class="tab" data-day="day4"><span>6/21 曼谷</span></div>
+            <div class="tab" data-day="day3"><span>6/20 芭達雅</span></div>
+            <div class="tab" data-day="day4"><span>6/21 芭達雅→曼谷</span></div>
             <div class="tab" data-day="day5"><span>6/22 曼谷</span></div>
             <div class="tab" data-day="day6"><span>6/23 返台</span></div>
         </div>
 
         <!-- Day 1: 6/18 芭達雅 -->
-        <div class="day-content active" id="day1">
+        <div class="day-content" id="day1">
             <div class="day-overview">
                 <h2>🌅 第一天：抵達芭達雅</h2>
-                <p>CI 331 班機 9:25 出發，12:10 抵達。機場到芭達雅，享受飛機餐後開始精彩旅程！</p>
+                <p>CI 331 班機 9:25 起飛、12:10 抵達，BKK 機場用餐後前往芭達雅，海灘看夕陽、成人秀、飛機夜市</p>
             </div>
 
             <div class="activities">
@@ -469,46 +505,123 @@
                     <div class="activity-header">
                         <div class="activity-time">9:25 - 12:10</div>
                         <div>
-                            <div class="activity-title">CI 331 班機</div>
-                            <div class="activity-location">📍 台北 → 芭達雅</div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>CI 331 班機</div>
+                            <div class="activity-location">📍 台北 → BKK 機場</div>
                         </div>
                     </div>
-                    
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="flight-checkin">
-                            <label for="flight-checkin">完成線上報到</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="flight-meal">
-                            <label for="flight-meal">飛機餐：BKK機場→芭達雅</label>
+                            <input type="checkbox" id="d1-flight-checkin">
+                            <label for="d1-flight-checkin">完成線上報到</label>
                         </div>
                     </div>
-                    
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Suvarnabhumi Airport')">📍 查看地圖</button>
                         <button class="btn btn-outline" onclick="openDetails('flight')">✈️ 航班詳情</button>
                     </div>
                 </div>
 
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">下午</div>
+                        <div class="activity-time">12:40 - 13:50</div>
                         <div>
-                            <div class="activity-title">BKK機場到芭達雅</div>
-                            <div class="activity-location">📍 機場接送或自行前往</div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>BKK 機場用餐 <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 機場美食街、手標茶 ChaTraMue（2樓入境大廳）</div>
                         </div>
                     </div>
-                    
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Suvarnabhumi Airport')">📍 機場地圖</button>
+                        <button class="btn btn-secondary" onclick="openMap('ChaTraMue Suvarnabhumi')">🍵 手標茶</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">14:00 - 15:30</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>BKK 機場 → 芭達雅 <span class="status-badge status-need">需要預約</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 包車或接送</div>
+                        </div>
+                    </div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="transport-option">
-                            <label for="transport-option">確認交通方式（預約Terminal 21 Pattaya暫定Terminal 21 Pattaya海邊購物）</label>
+                            <input type="checkbox" id="d1-transport-book">
+                            <label for="d1-transport-book">已預約包車</label>
                         </div>
                     </div>
-                    
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">15:30 - 16:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>置物、休息 <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 芭達雅飯店</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">16:00 - 17:30</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-free">自由時間</span>推薦逛街</div>
+                            <div class="activity-location">📍 Terminal 21 or 提早前往芭達雅海灘</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 備註景點：La marche、The Light</label></div>
+                    </div>
                     <div class="action-buttons">
-                        <button class="btn btn-secondary" onclick="openMap('Terminal 21 Pattaya')">🗺️ 前往購物中心</button>
+                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Pattaya')">🏬 Terminal 21</button>
+                        <button class="btn btn-secondary" onclick="openMap('La Marche Pattaya')">🛍️ La marche</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">17:40 - 18:40</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>芭達雅海灘看夕陽</div>
+                            <div class="activity-location">📍 日落時間約 18:28 - 18:30｜雨備：Terminal 21 吃晚餐</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Pattaya Beach')">🏖️ 芭達雅海灘</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">18:45 - 20:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-book">事先購買</span>6996 成人秀 <span class="status-badge status-need">需要預約</span><span class="status-badge status-adult">大人 800฿</span></div>
+                            <div class="activity-location">📍 โชว์ 69 นาเกลือ 6996</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 一場約 1 小時，看一場即可</label></div>
+                        <div class="option"><label>• 提前買票比現場便宜</label></div>
+                        <div class="option"><label>• 其他選擇：99 Show、89 Show</label></div>
+                        <div class="option">
+                            <input type="checkbox" id="d1-show-booked">
+                            <label for="d1-show-booked">已完成訂票</label>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('6996 Show Pattaya')">📍 查看地點</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">20:10 - 21:20</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>芭達雅飛機夜市</div>
+                            <div class="activity-location">📍 雨備：Terminal 21 吃晚餐</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Pattaya Airplane Night Market')">🌃 飛機夜市</button>
                     </div>
                 </div>
 
@@ -516,13 +629,13 @@
                     <div class="activity-header">
                         <div class="activity-time">晚上</div>
                         <div>
-                            <div class="activity-title">晚餐 & 自由活動</div>
-                            <div class="activity-location">📍 芭達雅市區</div>
+                            <div class="activity-title"><span class="type-tag type-bar">酒吧</span>BoyzTown、Walking Street <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 Pattaya Walking Street</div>
                         </div>
                     </div>
-                    
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Pattaya Beach')">🏖️ 芭達雅海灘</button>
+                        <button class="btn btn-primary" onclick="openMap('Pattaya Walking Street')">🍹 Walking Street</button>
+                        <button class="btn btn-secondary" onclick="openMap('BoyzTown Pattaya')">🏳️‍🌈 BoyzTown</button>
                     </div>
                 </div>
             </div>
@@ -541,64 +654,72 @@
         <!-- Day 2: 6/19 芭達雅 -->
         <div class="day-content" id="day2">
             <div class="day-overview">
-                <h2>🏝️ 第二天：芭達雅精彩一日遊</h2>
-                <p>暫定Terminal 21 Pattaya行程，可選擇海邊活動、購物或按摩放鬆</p>
+                <h2>🏝️ 第二天：芭達雅一日遊</h2>
+                <p>飯店早餐後，客製化一日遊（綠山野生動物園或芭提雅探索私人之旅），晚餐鳥巢造型網美餐廳，晚上 Jomtien Complex Walking Street</p>
             </div>
 
             <div class="activities">
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">上午</div>
+                        <div class="activity-time">早上</div>
                         <div>
-                            <div class="activity-title">Terminal 21 Pattaya 購物</div>
-                            <div class="activity-location">📍 Terminal 21 Pattaya</div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>飯店早餐</div>
+                            <div class="activity-location">📍 雨備？</div>
                         </div>
-                    </div>
-                    
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" id="shopping-terminal21">
-                            <label for="shopping-terminal21">Terminal 21 購物</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="food-court">
-                            <label for="food-court">美食街用餐</label>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Pattaya')">🏬 查看位置</button>
-                        <button class="btn btn-outline" onclick="openDetails('terminal21')">🛍️ 購物攻略</button>
                     </div>
                 </div>
 
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">下午</div>
+                        <div class="activity-time">早上 - 下午</div>
                         <div>
-                            <div class="activity-title">多元選擇活動</div>
-                            <div class="activity-location">📍 依選項而定</div>
+                            <div class="activity-title"><span class="type-tag type-book">事先購買</span>客製化一日遊 <span class="status-badge status-need">需要預約</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 芭達雅私人定製之旅（曼谷 / 芭達雅出發）</div>
                         </div>
                     </div>
-                    
+                    <div class="options">
+                        <div class="option"><label>• 選項 A：從曼谷或芭提雅出發的芭提雅探索私人之旅</label></div>
+                        <div class="option"><label>• 選項 B：綠山野生動物園一日遊</label></div>
+                        <div class="option">
+                            <input type="checkbox" id="d2-tour-booked">
+                            <label for="d2-tour-booked">已確認並預約</label>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Khao Kheow Open Zoo')">🦒 綠山動物園</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">晚餐</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>鳥巢造型網美餐廳 <span class="status-badge status-need">需要預約</span></div>
+                            <div class="activity-location">📍 The Sky Gallery / 3 Mermaids</div>
+                        </div>
+                    </div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="beach-activity">
-                            <label for="beach-activity">海邊活動或按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="water-sport">
-                            <label for="water-sport">或水上活動</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="spa-massage">
-                            <label for="spa-massage">或按摩 SPA</label>
+                            <input type="checkbox" id="d2-dinner-booked">
+                            <label for="d2-dinner-booked">已訂位</label>
                         </div>
                     </div>
-                    
                     <div class="action-buttons">
-                        <button class="btn btn-secondary" onclick="openMap('Pattaya Beach')">🏖️ 海灘位置</button>
-                        <button class="btn btn-outline" onclick="openDetails('activities')">🎯 活動推薦</button>
+                        <button class="btn btn-primary" onclick="openMap('The Sky Gallery Pattaya')">🌅 The Sky Gallery</button>
+                        <button class="btn btn-secondary" onclick="openMap('3 Mermaids Pattaya')">🧜 3 Mermaids</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">晚上</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-bar">酒吧</span>Jomtien Complex Walking Street <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 The Oxygen Beach 等</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Jomtien Complex Walking Street')">🍹 Jomtien Complex</button>
                     </div>
                 </div>
             </div>
@@ -614,90 +735,70 @@
             </div>
         </div>
 
-        <!-- Day 3: 6/20 芭達雅→曼谷 -->
+        <!-- Day 3: 6/20 芭達雅 Circuit Festival -->
         <div class="day-content" id="day3">
             <div class="day-overview">
-                <h2>🚌 第三天：芭達雅→曼谷，Circuit Festival</h2>
-                <p>白天多元活動選擇，晚上Circuit Festival Asia 2026派對</p>
+                <h2>🎉 第三天：Circuit Festival Asia 2026</h2>
+                <p>早上飯店放鬆、Terminal 21 用餐，下午與晚上 The Zign Pool Party + Private Beach Party</p>
             </div>
 
             <div class="activities">
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">12點結房</div>
+                        <div class="activity-time">早上</div>
                         <div>
-                            <div class="activity-title">多元活動選擇</div>
-                            <div class="activity-location">📍 芭達雅各景點</div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>飯店早餐、睡到自然醒</div>
+                            <div class="activity-location">📍 飯店泳池玩水拍照 or 自由時間</div>
                         </div>
                     </div>
-                    
                     <div class="options">
-                        <div class="option">
-                            <input type="checkbox" id="temple-visit">
-                            <label for="temple-visit">Option 1: Jerry 聲谷巴司馬喇嘛，來拉瑪力大學食一條街 都王角 + ICONSIAM</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="shopping-option2">
-                            <label for="shopping-option2">Option 2: 洽圖洽假日市場</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="pool-option">
-                            <label for="pool-option">Option 3: 飯店泳池 or 按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="university-food">
-                            <label for="university-food">來拉瑪力大學夜市（來拉美食一條街）</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="night-market">
-                            <label for="night-market">Jodd Fairs (高速夜市)</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="asiatique">
-                            <label for="asiatique">Asiatique 河濱碼頭夜市 (有摩天輪)</label>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('ICONSIAM Bangkok')">🏬 ICONSIAM</button>
-                        <button class="btn btn-secondary" onclick="openMap('Chatuchak Market')">🛍️ 洽圖洽市場</button>
+                        <div class="option"><label>• 備註：Eak Fish Balls、Khun Sri 等美食</label></div>
                     </div>
                 </div>
 
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">2:30 PM - 6 PM</div>
+                        <div class="activity-time">午餐</div>
                         <div>
-                            <div class="activity-title">Circuit Festival Asia 2026</div>
-                            <div class="activity-location">📍 The Zign Pool</div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>暫定 Terminal 21 Pattaya <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 Terminal 21 Pattaya 美食街</div>
                         </div>
                     </div>
-                    
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" id="circuit-festival">
-                            <label for="circuit-festival">參加 Circuit Festival</label>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Pattaya')">🏬 Terminal 21</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">14:30 - 18:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-book">事先購買</span>Circuit Festival - The Zign Pool <span class="status-badge status-booked">已預約</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 The Zign Pool（Pool Party）</div>
                         </div>
                     </div>
-                    
                     <div class="action-buttons">
                         <button class="btn btn-primary" onclick="openDetails('circuit')">🎉 Festival 詳情</button>
+                        <button class="btn btn-secondary" onclick="openMap('The Zign Hotel Pattaya')">📍 The Zign</button>
                     </div>
                 </div>
 
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">6 PM - 9 PM</div>
+                        <div class="activity-time">晚餐</div>
                         <div>
-                            <div class="activity-title">Circuit Festival Private Beach</div>
-                            <div class="activity-location">📍 The Zign Private Beach</div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>晚餐 <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 待決定</div>
                         </div>
                     </div>
-                    
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" id="private-beach">
-                            <label for="private-beach">私人海灘派對</label>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">18:00 - 21:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-book">事先購買</span>Circuit Festival - The Zign Private Beach <span class="status-badge status-booked">已預約</span></div>
+                            <div class="activity-location">📍 The Zign Private Beach（沙灘派對）</div>
                         </div>
                     </div>
                 </div>
@@ -714,45 +815,118 @@
             </div>
         </div>
 
-        <!-- Day 4: 6/21 曼谷 -->
+        <!-- Day 4: 6/21 芭達雅→曼谷 -->
         <div class="day-content" id="day4">
             <div class="day-overview">
-                <h2>🏛️ 第四天：曼谷文化與美食</h2>
-                <p>多種方案選擇，包括Silom出街、商場購物、建興酒家用餐等</p>
+                <h2>🚗 第四天：芭達雅→曼谷</h2>
+                <p>11:45 退房、包車前往曼谷，按摩預約、巴哥咖啡廳、朱拉隆功大學美食一條街，晚上 Silom 酒吧</p>
             </div>
 
             <div class="activities">
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">白天</div>
+                        <div class="activity-time">早上</div>
                         <div>
-                            <div class="activity-title">多元遊覽選擇</div>
-                            <div class="activity-location">📍 曼谷各區</div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>睡到自然醒、飯店泳池玩水拍照</div>
+                            <div class="activity-location">📍 芭達雅飯店</div>
                         </div>
                     </div>
-                    
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">11:45</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>退房</div>
+                            <div class="activity-location">📍 芭達雅飯店</div>
+                        </div>
+                    </div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="silom-option1">
-                            <label for="silom-option1">Option 1 (出街推薦): 空身公司出街 Dust Central Park (Silom)</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="shopping-option2-day4">
-                            <label for="shopping-option2-day4">Option 2: 飯店泳池或水療館 or 按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="temple-option3">
-                            <label for="temple-option3">Option 3: 暹羅自然錄 or 按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="shopping-option4">
-                            <label for="shopping-option4">Option 4: 錢多一日新 建興酒家</label>
+                            <input type="checkbox" id="d4-checkout">
+                            <label for="d4-checkout">完成退房</label>
                         </div>
                     </div>
-                    
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">午餐</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>午餐</div>
+                            <div class="activity-location">📍 待決定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">12:30 - 14:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>包車前往曼谷 <span class="status-badge status-need">需要預約</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 芭達雅 → 曼谷</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="d4-transport-booked">
+                            <label for="d4-transport-booked">已預約包車</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">14:20 ~</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>The Prime Massage（按摩預約隔日） <span class="status-badge status-onsite">現場買票</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 The Prime Massage Bangkok</div>
+                        </div>
+                    </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Silom Bangkok')">🏙️ Silom 區域</button>
-                        <button class="btn btn-secondary" onclick="openDetails('bangkok-options')">🎯 曼谷選項</button>
+                        <button class="btn btn-primary" onclick="openMap('The Prime Massage Bangkok')">💆 The Prime Massage</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">15:00 - 16:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>巴哥咖啡廳 <span class="status-badge status-need">需要預約</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 曼谷網美咖啡廳</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="d4-cafe-booked">
+                            <label for="d4-cafe-booked">已預約</label>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Pug Cafe Bangkok')">🐶 巴哥咖啡廳</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">下午</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>朱拉隆功大學美食一條街</div>
+                            <div class="activity-location">📍 Chulalongkorn University Food Street</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Chulalongkorn University Food Street')">🍜 朱拉美食街</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">傍晚</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>回飯店 or Si Lom</div>
+                            <div class="activity-location">📍 依行程而定</div>
+                        </div>
                     </div>
                 </div>
 
@@ -760,37 +934,17 @@
                     <div class="activity-header">
                         <div class="activity-time">晚上</div>
                         <div>
-                            <div class="activity-title">精彩夜生活與美食</div>
-                            <div class="activity-location">📍 依選項而定</div>
+                            <div class="activity-title"><span class="type-tag type-bar">酒吧</span>Silom 夜生活 <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 熊區 / 主流綜合區</div>
                         </div>
                     </div>
-                    
                     <div class="options">
-                        <div class="option">
-                            <input type="checkbox" id="nextopia">
-                            <label for="nextopia">Option 1 (出街推薦): Siam Paragon 「未來夢都市 NEXTOPIA」</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="lumphini">
-                            <label for="lumphini">Option 2 (街坊推薦): Lumphini Park (沒巨蟒)</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="siam-option3">
-                            <label for="siam-option3">Option 3 (初訪推薦)</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="big-c">
-                            <label for="big-c">Option 4: Big C採購</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="song-wat">
-                            <label for="song-wat">Option 5 (文青): 高處克音樂 Song Wat</label>
-                        </div>
+                        <div class="option"><label>• 熊：Barber、Cake、HUG</label></div>
+                        <div class="option"><label>• 主流（綜合）：DJ Station、GOD、BEEF</label></div>
                     </div>
-                    
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Siam Paragon')">🏬 Siam Paragon</button>
-                        <button class="btn btn-outline" onclick="openMap('Lumphini Park')">🌳 Lumphini Park</button>
+                        <button class="btn btn-primary" onclick="openMap('DJ Station Silom')">🎵 DJ Station</button>
+                        <button class="btn btn-secondary" onclick="openMap('GOD Bangkok Silom')">🍹 GOD</button>
                     </div>
                 </div>
             </div>
@@ -809,63 +963,115 @@
         <!-- Day 5: 6/22 曼谷 -->
         <div class="day-content" id="day5">
             <div class="day-overview">
-                <h2>🛍️ 第五天：曼谷最後購物</h2>
-                <p>最後一天自由活動，暹羅自然錄、按摩、飯店設施或機場前往</p>
+                <h2>🏛️ 第五天：曼谷一日遊</h2>
+                <p>早上飯店放鬆，午餐建興酒家（可選），下午景點，晚餐 Copper beyond buffet（5/1訂），晚上 Silom 酒吧</p>
             </div>
 
             <div class="activities">
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">上午至下午</div>
+                        <div class="activity-time">早上</div>
                         <div>
-                            <div class="activity-title">最後自由活動</div>
-                            <div class="activity-location">📍 曼谷市區</div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>睡到自然醒 or 飯店泳池玩水拍照</div>
+                            <div class="activity-location">📍 曼谷飯店</div>
                         </div>
-                    </div>
-                    
-                    <div class="options">
-                        <div class="option">
-                            <input type="checkbox" id="siam-natural">
-                            <label for="siam-natural">暹羅自然錄 or 按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="hotel-facilities">
-                            <label for="hotel-facilities">或飯店泳池/水療館 or 按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="terminal21-bangkok">
-                            <label for="terminal21-bangkok">Terminal 21 曼谷站前 or 按摩</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="airport-early">
-                            <label for="airport-early">或早點前往機場</label>
-                        </div>
-                    </div>
-                    
-                    <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Bangkok')">🚉 Terminal 21 Asok</button>
-                        <button class="btn btn-outline" onclick="openDetails('last-day')">📋 最後一天建議</button>
                     </div>
                 </div>
 
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">14:00 - 機場</div>
+                        <div class="activity-time">早上</div>
                         <div>
-                            <div class="activity-title">前往機場與精選購物</div>
-                            <div class="activity-location">📍 素萬那普國際機場</div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>早上景點（待決定）</div>
+                            <div class="activity-location">📍 曼谷市區</div>
                         </div>
                     </div>
-                    
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">午餐</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>建興酒家（可選）</div>
+                            <div class="activity-location">📍 Somboon Seafood 建興酒家</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Somboon Seafood Bangkok')">🦀 建興酒家</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">下午</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>下午景點 <span class="status-badge status-booked">已預約</span><span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 待決定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">下午</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-spot">景點</span>自由活動景點</div>
+                            <div class="activity-location">📍 待決定</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">晚餐</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>Copper beyond buffet <span class="status-badge status-need">需要預約</span></div>
+                            <div class="activity-location">📍 Gaysorn Amarin（5/1 訂位）</div>
+                        </div>
+                    </div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="airport-shopping">
-                            <label for="airport-shopping">機場免稅店購物</label>
+                            <input type="checkbox" id="d5-buffet-booked">
+                            <label for="d5-buffet-booked">5/1 已訂位</label>
                         </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="window.open('https://web.hungryhub.com/zh_hant/restaurants/copper-beyond-buffet-gaysorn-amarin-hungry-hub-bangkok/web', '_blank')">🍽️ HungryHub 訂位</button>
+                        <button class="btn btn-secondary" onclick="openMap('Copper Beyond Buffet Gaysorn Amarin')">📍 地圖</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">傍晚</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-free">自由時間</span>可預約按摩 <span class="status-badge status-optional">可預約</span></div>
+                            <div class="activity-location">📍 The Prime Massage 或其他</div>
+                        </div>
+                    </div>
+                    <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="souvenirs">
-                            <label for="souvenirs">最後紀念品採購</label>
+                            <input type="checkbox" id="d5-massage-booked">
+                            <label for="d5-massage-booked">已預約按摩</label>
                         </div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">晚上</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-bar">酒吧</span>Silom 夜生活 <span class="status-badge status-waiting">等候確認</span></div>
+                            <div class="activity-location">📍 熊區 / 主流綜合區</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 熊：Barber、Cake、HUG</label></div>
+                        <div class="option"><label>• 主流（綜合）：DJ Station、GOD、BEEF</label></div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('DJ Station Silom')">🎵 DJ Station</button>
+                        <button class="btn btn-secondary" onclick="openMap('GOD Bangkok Silom')">🍹 GOD</button>
                     </div>
                 </div>
             </div>
@@ -885,36 +1091,95 @@
         <div class="day-content" id="day6">
             <div class="day-overview">
                 <h2>✈️ 第六天：返台</h2>
-                <p>CI 836 班機 17:30 起飛，22:05 抵達台北，帶著滿滿回憶回家</p>
+                <p>早上自由活動、午餐建興酒家（可選），14:00 前往機場，CI 836 班機 17:30 起飛、22:05 抵達台北</p>
             </div>
 
             <div class="activities">
                 <div class="activity">
                     <div class="activity-header">
-                        <div class="activity-time">CI 836</div>
+                        <div class="activity-time">早上</div>
                         <div>
-                            <div class="activity-title">返台班機</div>
-                            <div class="activity-location">📍 17:30 → 22:05</div>
+                            <div class="activity-title"><span class="type-tag type-hotel">飯店</span>早上自由活動</div>
+                            <div class="activity-location">📍 曼谷飯店</div>
                         </div>
                     </div>
-                    
+                    <div class="options">
+                        <div class="option"><label>• 睡到自然醒 or 飯店泳池玩水拍照</label></div>
+                        <div class="option"><label>• or 按摩</label></div>
+                        <div class="option"><label>• or 逛街</label></div>
+                        <div class="option"><label>• or 採購</label></div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">午餐</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-meal">餐廳</span>建興酒家（可選）</div>
+                            <div class="activity-location">📍 Somboon Seafood</div>
+                        </div>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="openMap('Somboon Seafood Bangkok')">🦀 建興酒家</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">14:00</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>前往機場</div>
+                            <div class="activity-location">📍 素萬那普國際機場 (BKK)</div>
+                        </div>
+                    </div>
                     <div class="options">
                         <div class="option">
-                            <input type="checkbox" id="return-checkin">
-                            <label for="return-checkin">完成回程報到</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="final-photos">
-                            <label for="final-photos">機場最後合照</label>
-                        </div>
-                        <div class="option">
-                            <input type="checkbox" id="safe-arrival">
-                            <label for="safe-arrival">安全抵達台灣</label>
+                            <input type="checkbox" id="d6-to-airport">
+                            <label for="d6-to-airport">已出發前往機場</label>
                         </div>
                     </div>
-                    
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">17:30 - 22:05</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>CI 836 返台班機<span class="status-badge status-adult">大人</span></div>
+                            <div class="activity-location">📍 曼谷 → 台北</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="d6-return-checkin">
+                            <label for="d6-return-checkin">完成回程報到</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="d6-final-photos">
+                            <label for="d6-final-photos">機場最後合照</label>
+                        </div>
+                    </div>
                     <div class="action-buttons">
                         <button class="btn btn-primary" onclick="openDetails('return-flight')">✈️ 班機資訊</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">22:05 ~</div>
+                        <div>
+                            <div class="activity-title"><span class="type-tag type-transport">交通</span>台灣機場接送 <span class="status-badge status-optional">可預約</span></div>
+                            <div class="activity-location">📍 桃園機場 → 住家</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="d6-pickup-booked">
+                            <label for="d6-pickup-booked">已預約接送</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="d6-safe-arrival">
+                            <label for="d6-safe-arrival">安全抵達家中</label>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -925,6 +1190,170 @@
                     <div class="photo-upload" onclick="uploadPhoto('day6')">
                         <div>📷</div>
                         <div>點擊上傳照片</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 注意事項 -->
+        <div class="day-content active" id="notes">
+            <div class="day-overview">
+                <h2>📋 出發前必備清單</h2>
+                <p>出發前請逐一確認，「必須」項目務必完成，「可選」項目依個人需求準備</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">必須</div>
+                        <div>
+                            <div class="activity-title">🛂 證件與入境</div>
+                            <div class="activity-location">📍 出發前務必完成</div>
+                        </div>
+                    </div>
+
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="check-passport">
+                            <label for="check-passport">護照（效期 &gt; 6個月）、機票、住宿證明</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-tdac">
+                            <label for="check-tdac">填寫電子入境卡 TDAC（72小時前完成）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-cash">
+                            <label for="check-cash">攜帶現金等值 20,000 泰銖以上</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-sim">
+                            <label for="check-sim">eSIM / SIM（可選 Klook，推薦在台灣先買好）</label>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary" onclick="window.open('https://tdac.immigration.go.th/', '_blank')">🌐 TDAC 入境卡</button>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">建議</div>
+                        <div>
+                            <div class="activity-title">🎒 建議準備</div>
+                            <div class="activity-location">📍 可選但推薦</div>
+                        </div>
+                    </div>
+
+                    <div class="options">
+                        <div class="option">
+                            <input type="checkbox" id="check-insurance">
+                            <label for="check-insurance">旅平險</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-medicine">
+                            <label for="check-medicine">個人藥及胃藥</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-grab">
+                            <label for="check-grab">安裝 Grab 並綁定信用卡（Bolt 也可以安裝）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-mosquito">
+                            <label for="check-mosquito">防蚊液</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-sunscreen">
+                            <label for="check-sunscreen">防曬乳</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-appliance">
+                            <label for="check-appliance">吹風機、電棒捲、離子夾、刮鬍刀等美容電器（使用前請確認是否支援國際電壓）</label>
+                        </div>
+                        <div class="option">
+                            <input type="checkbox" id="check-umbrella">
+                            <label for="check-umbrella">帶雨具</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="day-overview" style="margin-top: 2rem;">
+                <h2>⚠️ 旅行中注意事項</h2>
+                <p>泰國當地風俗與安全提醒，出發前請詳細閱讀</p>
+            </div>
+
+            <div class="activities">
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">安全</div>
+                        <div>
+                            <div class="activity-title">🎒 防竊與財物</div>
+                            <div class="activity-location">📍 人多場合特別注意</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 人多時包包背前面或是帶防盜包</label></div>
+                        <div class="option"><label>• 盡量不帶值錢的東西出門，現金不超過 3000 泰銖</label></div>
+                        <div class="option"><label>• 護照建議放旅館，拍照存手機</label></div>
+                        <div class="option"><label>• 不理會過度友善的外國人，尤其要你看你國家錢的（直接叫他滾）— 所有國家適用</label></div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">飲食</div>
+                        <div>
+                            <div class="activity-title">🍜 飲食建議</div>
+                            <div class="activity-location">📍 泰國當地</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• （泰國）食物以店面餐廳、美食街為主，路邊攤建議看評論後決定是否嘗試（腸胃差者、生海鮮建議避免）</label></div>
+                        <div class="option"><label>• 自來水不可直接生飲，需購買瓶裝水或使用飯店水壺</label></div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">禮儀</div>
+                        <div>
+                            <div class="activity-title">🙏 寺廟與文化禮儀</div>
+                            <div class="activity-location">📍 尊重當地文化</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 寺廟禮儀：進入佛寺不能穿拖鞋、短裙、短褲、無袖上衣。需脫鞋並注意服裝莊重</label></div>
+                        <div class="option"><label>• 身體禁忌：泰國人認為頭部神聖，不可隨意觸摸泰國人的頭部（包括小孩）</label></div>
+                        <div class="option"><label>• 不可褻瀆泰國皇室，包括隨處可見的泰皇肖像、象徵泰皇的黃色旗幟等</label></div>
+                        <div class="option"><label>• 對於不認識或不了解的廟宇請不要隨便亂拜</label></div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">消費</div>
+                        <div>
+                            <div class="activity-title">💰 小費與詐騙預防</div>
+                            <div class="activity-location">📍 交易時注意</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 小費文化：泰國有小費習慣，飯店人員幫忙提行李、按摩師傅服務完之後都需給小費。小費不可以給銅板零錢</label></div>
+                        <div class="option"><label>• 詐騙預防：景點附近主動搭訕、聲稱「景點沒開」的嘟嘟車司機通常是騙子。建議使用 Grab 或 Bolt 叫車</label></div>
+                    </div>
+                </div>
+
+                <div class="activity">
+                    <div class="activity-header">
+                        <div class="activity-time">氣候</div>
+                        <div>
+                            <div class="activity-title">🌧️ 天氣提醒</div>
+                            <div class="activity-location">📍 6月雨季</div>
+                        </div>
+                    </div>
+                    <div class="options">
+                        <div class="option"><label>• 泰國雨季約在 6 月至 10 月，這段時間去泰國玩，要記得攜帶雨具唷！</label></div>
                     </div>
                 </div>
             </div>
@@ -953,7 +1382,7 @@
 
         // 倒數計時
         function updateCountdown() {
-            const tripDate = new Date('2024-06-18T09:25:00');
+            const tripDate = new Date('2026-06-18T09:25:00');
             const now = new Date();
             const timeDiff = tripDate - now;
             
@@ -1108,13 +1537,14 @@
                 'flight': `
                     <h3>✈️ 航班資訊</h3>
                     <p><strong>去程:</strong> CI 331<br>
-                    台北 09:25 → 芭達雅 12:10</p>
+                    台北 09:25 → 曼谷 BKK 12:10</p>
                     <p><strong>回程:</strong> CI 836<br>
                     曼谷 17:30 → 台北 22:05</p>
                     <p><strong>注意事項:</strong><br>
                     • 請提前2-3小時抵達機場<br>
-                    • 確認護照效期<br>
-                    • 預辦登機服務</p>
+                    • 確認護照效期 &gt; 6 個月<br>
+                    • 72 小時前完成 TDAC 電子入境卡<br>
+                    • 預辦線上報到</p>
                 `,
                 'terminal21': `
                     <h3>🏬 Terminal 21 Pattaya</h3>
