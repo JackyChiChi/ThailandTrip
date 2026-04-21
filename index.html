@@ -41,6 +41,7 @@
             position: relative;
             overflow: hidden;
         }
+        
 
         .cover-banner {
             width: 100%;
@@ -167,6 +168,7 @@
             font-weight: 500;
             position: relative;
             overflow: hidden;
+            flex-shrink: 0;
         }
 
         .tab::before {
@@ -554,23 +556,46 @@
             }
 
             .header-info {
-                position: static;
-                background: var(--gradient-sunset);
-                padding: 1.5rem 1rem 1.25rem;
-            }
-            .cover-banner::before {
-                display: none;
+                padding: 0.6rem 0.75rem 0.4rem;
             }
             .title {
-                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+                font-size: 1.3rem;
+                margin-bottom: 0.2rem;
+                text-shadow: 0 2px 5px rgba(0,0,0,0.85), 0 0 10px rgba(0,0,0,0.5);
             }
             .subtitle {
-                text-shadow: none;
+                font-size: 0.75rem;
+                margin-bottom: 0.5rem;
+            }
+            .countdown-weather {
+                gap: 0.5rem;
+                margin-top: 0.25rem;
             }
             .countdown-box, .weather-box {
-                background: rgba(255, 255, 255, 0.2);
-                border: 1px solid rgba(255, 255, 255, 0.3);
-                box-shadow: none;
+                padding: 0.4rem 0.7rem;
+                min-width: 0;
+                border-radius: 10px;
+            }
+            .countdown-number {
+                font-size: 1.1rem;
+            }
+            .countdown-label, .weather-label {
+                font-size: 0.65rem;
+            }
+            .weather-icon {
+                font-size: 1rem;
+            }
+            .cover-banner::before {
+                height: 45%;
+                background: linear-gradient(180deg, rgba(44, 24, 16, 0.8) 0%, rgba(44, 24, 16, 0.45) 50%, transparent 100%);
+            }
+            .tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+            }
+            .tabs {
+                -webkit-overflow-scrolling: touch;
+                scroll-padding: 1rem;
             }
         }
     </style>
