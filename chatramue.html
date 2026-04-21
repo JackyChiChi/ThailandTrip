@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手標茶 ChaTraMue | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tea-orange: #E8641A;
+            --tea-deep: #B84414;
+            --tea-cream: #F5DEB3;
+            --tea-gold: #D4A017;
+            --thai-red: #DC143C;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #2C1810;
+            --text-medium: #5D4E37;
+            --gradient-tea: linear-gradient(135deg, #E8641A, #B84414);
+            --gradient-matcha: linear-gradient(135deg, #8BC34A, #558B2F);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-tea);
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .title-en {
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            opacity: 0.9;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--tea-orange);
+        }
+
+        .section h2 {
+            color: var(--tea-deep);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--tea-gold);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background: var(--soft-cream);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(232, 100, 26, 0.25);
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--tea-deep);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            margin-top: 0.2rem;
+        }
+
+        .drink-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .drink-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1rem;
+            border: 1px solid rgba(232, 100, 26, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        .drink-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(232, 100, 26, 0.25);
+        }
+        .drink-card.signature {
+            background: linear-gradient(135deg, #FFF3E0, #FFCC80);
+            border: 2px solid var(--tea-orange);
+        }
+        .drink-card.matcha {
+            background: linear-gradient(135deg, #F1F8E9, #C5E1A5);
+            border: 2px solid #689F38;
+        }
+        .drink-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .drink-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+        }
+        .drink-thai {
+            font-size: 0.78rem;
+            color: var(--text-medium);
+            font-style: italic;
+            margin-bottom: 0.4rem;
+        }
+        .drink-desc {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+        }
+        .drink-price {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--tea-deep);
+        }
+        .badge-signature {
+            display: inline-block;
+            background: var(--thai-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+        .badge-new {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .menu-category {
+            margin-top: 1.5rem;
+        }
+        .menu-category h3 {
+            color: var(--tea-orange);
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px dashed rgba(232, 100, 26, 0.3);
+        }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        .menu-list li {
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.4rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.92rem;
+        }
+        .menu-list li .name-thai {
+            color: var(--text-medium);
+            font-size: 0.8rem;
+            font-style: italic;
+        }
+        .menu-list li .price {
+            color: var(--tea-deep);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .branch-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .branch-card {
+            background: var(--soft-cream);
+            padding: 0.9rem 1rem;
+            border-radius: 12px;
+            border-left: 4px solid var(--tea-orange);
+        }
+        .branch-card.airport {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-left: 4px solid var(--thai-red);
+        }
+        .branch-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.2rem;
+        }
+        .branch-info {
+            font-size: 0.85rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+        .branch-map {
+            display: inline-block;
+            background: var(--tea-orange);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+        .branch-map:hover {
+            background: var(--tea-deep);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.75rem 1.4rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-tea);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(184, 68, 20, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--tea-orange);
+            border: 2px solid var(--tea-orange);
+        }
+        .btn-outline:hover {
+            background: var(--tea-orange);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--tea-gold);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        .airport-alert {
+            background: linear-gradient(135deg, #FFEBEE, #FFCDD2);
+            border-left: 6px solid var(--thai-red);
+            border-radius: 12px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+        }
+        .airport-alert strong {
+            color: var(--thai-red);
+            display: block;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.8rem; }
+            .title-en { font-size: 0.9rem; }
+            .logo { font-size: 3rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">🍵</div>
+        <h1 class="title">手標茶</h1>
+        <div class="title-en">CHATRAMUE · ชาตรามือ</div>
+        <p class="tagline">80 年泰國國民茶飲 · 一抹招牌橘色奶茶</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於手標茶</h2>
+            <p>
+                手標茶（ChaTraMue，中文意為「手牌茶」）由 Limsoonthornkul 家族於
+                <strong>1945 年</strong>創立，是泰國最具代表性的茶飲品牌。
+                招牌<strong>泰式奶茶橘色配方</strong>在泰國街頭、餐廳、超商隨處可見，
+                更是觀光客必朝聖的國民飲料。
+            </p>
+            <p>
+                從傳統市場茶葉專賣發跡到全國連鎖飲料店，目前在泰國有超過 <strong>150 間分店</strong>，
+                並外銷到亞洲、歐美多國。
+            </p>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <span class="stat-number">1945</span>
+                    <div class="stat-label">創立年份</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">80 年</span>
+                    <div class="stat-label">老字號</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">150+</span>
+                    <div class="stat-label">泰國分店</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">40+฿</span>
+                    <div class="stat-label">一杯起</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌟 必喝招牌</h2>
+            <div class="drink-grid">
+                <div class="drink-card signature">
+                    <span class="drink-emoji">🍊</span>
+                    <div class="drink-name">No.1 泰式奶茶 <span class="badge-signature">招牌</span></div>
+                    <div class="drink-thai">ชาเย็น · Thai Milk Tea (Iced)</div>
+                    <div class="drink-desc">
+                        濃厚紅茶 + 煉乳 + 鮮奶，標誌性的橘色，香甜中帶茶香，
+                        <strong>一定要試冰的！</strong>
+                    </div>
+                    <div class="drink-price">約 45-65฿</div>
+                </div>
+                <div class="drink-card matcha">
+                    <span class="drink-emoji">🍵</span>
+                    <div class="drink-name">泰式綠茶 <span class="badge-signature">必點</span></div>
+                    <div class="drink-thai">ชาเขียวเย็น · Thai Green Tea</div>
+                    <div class="drink-desc">
+                        鮮綠色茉莉綠茶，清新順口，比奶茶不膩。
+                    </div>
+                    <div class="drink-price">約 45-60฿</div>
+                </div>
+                <div class="drink-card signature">
+                    <span class="drink-emoji">🍦</span>
+                    <div class="drink-name">泰奶霜淇淋 <span class="badge-new">人氣</span></div>
+                    <div class="drink-thai">ไอศกรีมชาไทย · Thai Tea Soft Serve</div>
+                    <div class="drink-desc">
+                        甜筒上綿密泰奶霜淇淋，拍照打卡必備，夏天超消暑。
+                    </div>
+                    <div class="drink-price">約 55-75฿</div>
+                </div>
+                <div class="drink-card">
+                    <span class="drink-emoji">🌹</span>
+                    <div class="drink-name">玫瑰奶茶</div>
+                    <div class="drink-thai">ชากุหลาบ · Rose Milk Tea</div>
+                    <div class="drink-desc">
+                        粉紅色調帶玫瑰香氣，女生最愛的浪漫款。
+                    </div>
+                    <div class="drink-price">約 55-70฿</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 完整菜單</h2>
+
+            <div class="menu-category">
+                <h3>🍊 泰式茶系列（招牌）</h3>
+                <ul class="menu-list">
+                    <li>No.1 泰式奶茶 <span class="name-thai">Thai Milk Tea</span> <span class="price">55฿</span></li>
+                    <li>No.2 泰式煉乳紅茶 <span class="name-thai">Thai Tea with Condensed Milk</span> <span class="price">50฿</span></li>
+                    <li>泰式綠茶 <span class="name-thai">Thai Green Tea</span> <span class="price">55฿</span></li>
+                    <li>綠奶茶 <span class="name-thai">Green Milk Tea</span> <span class="price">60฿</span></li>
+                    <li>玫瑰奶茶 <span class="name-thai">Rose Milk Tea</span> <span class="price">65฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍋 純茶與檸檬茶</h3>
+                <ul class="menu-list">
+                    <li>錫蘭紅茶 <span class="name-thai">Ceylon Tea</span> <span class="price">45฿</span></li>
+                    <li>泰式檸檬紅茶 <span class="name-thai">Thai Lemon Tea</span> <span class="price">50฿</span></li>
+                    <li>蜂蜜檸檬茶 <span class="name-thai">Honey Lemon Tea</span> <span class="price">55฿</span></li>
+                    <li>茉莉綠茶 <span class="name-thai">Jasmine Green Tea</span> <span class="price">45฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍵 日式系列</h3>
+                <ul class="menu-list">
+                    <li>抹茶拿鐵 <span class="name-thai">Matcha Latte</span> <span class="price">75฿</span></li>
+                    <li>抹茶霜淇淋 <span class="name-thai">Matcha Soft Serve</span> <span class="price">70฿</span></li>
+                    <li>玄米茶 <span class="name-thai">Genmaicha</span> <span class="price">55฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍰 甜點與霜淇淋</h3>
+                <ul class="menu-list">
+                    <li>泰奶霜淇淋甜筒 <span class="name-thai">Thai Tea Soft Serve Cone</span> <span class="price">65฿</span></li>
+                    <li>綠茶霜淇淋 <span class="name-thai">Green Tea Soft Serve</span> <span class="price">65฿</span></li>
+                    <li>泰奶蛋糕捲 <span class="name-thai">Thai Tea Cake Roll</span> <span class="price">85฿</span></li>
+                    <li>抹茶蛋糕捲 <span class="name-thai">Matcha Cake Roll</span> <span class="price">85฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🎁 伴手禮（茶葉包）</h3>
+                <ul class="menu-list">
+                    <li>泰式奶茶茶粉（袋裝 400g） <span class="price">220฿</span></li>
+                    <li>泰式奶茶茶包（25 入） <span class="price">180฿</span></li>
+                    <li>綜合禮盒（奶茶 + 綠茶） <span class="price">350฿</span></li>
+                </ul>
+            </div>
+
+            <div class="note">
+                💡 價格為曼谷市區參考價，機場與百貨可能略高。冷飲統一加冰塊，怕甜可請店員「少糖 less sweet」。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>✈️ 機場分店（第一天必打卡！）</h2>
+            <div class="airport-alert">
+                <strong>⭐ 入境大廳 2 樓直接喝到</strong>
+                你們抵達 BKK 機場後，在 <strong>2 樓入境大廳</strong>就能找到手標茶，不用拖到市區才喝！
+                行程安排的 12:40-13:50 機場用餐時段剛好可以先來一杯打招呼。
+            </div>
+            <div class="branch-list">
+                <div class="branch-card airport">
+                    <div class="branch-name">✈️ Suvarnabhumi Airport (BKK) 入境大廳</div>
+                    <div class="branch-info">2F 入境大廳 · 美食街內</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+Suvarnabhumi+Airport" target="_blank">查看位置</a>
+                </div>
+                <div class="branch-card airport">
+                    <div class="branch-name">✈️ Suvarnabhumi Airport 出境大廳</div>
+                    <div class="branch-info">4F 出境大廳 · 安檢前</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+Suvarnabhumi+Departure" target="_blank">查看位置</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📍 曼谷熱門分店</h2>
+            <div class="branch-list">
+                <div class="branch-card">
+                    <div class="branch-name">🏬 Siam Paragon</div>
+                    <div class="branch-info">G 樓美食街 · BTS Siam 站</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+Siam+Paragon" target="_blank">查看地圖</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-name">🏬 Terminal 21 Asok</div>
+                    <div class="branch-info">LG 美食街 · BTS Asok 站</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+Terminal+21+Asok" target="_blank">查看地圖</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-name">🏬 CentralWorld</div>
+                    <div class="branch-info">7 樓美食街 · BTS Chit Lom 站</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+CentralWorld" target="_blank">查看地圖</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-name">🏬 ICONSIAM</div>
+                    <div class="branch-info">G 樓 · 昭披耶河畔</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+ICONSIAM" target="_blank">查看地圖</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-name">🚉 MBK Center</div>
+                    <div class="branch-info">6 樓美食街 · BTS National Stadium 站</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+MBK+Center" target="_blank">查看地圖</a>
+                </div>
+                <div class="branch-card">
+                    <div class="branch-name">🏖️ Terminal 21 Pattaya</div>
+                    <div class="branch-info">芭達雅分店（行程第一天可逛）</div>
+                    <a class="branch-map" href="https://www.google.com/maps/search/ChaTraMue+Terminal+21+Pattaya" target="_blank">查看地圖</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 點餐小撇步</h2>
+            <ul class="menu-list">
+                <li>🍨 <span>冰塊量可選（正常 / 少冰 / 去冰），熱飲也有，但必點冰的才夠味</span></li>
+                <li>🍯 <span>甜度可調：「less sweet」少糖、「no sugar」無糖</span></li>
+                <li>🥛 <span>泰式奶茶原本就很甜，建議少糖；綠茶奶茶甜度較低</span></li>
+                <li>📸 <span>漸層色拍照必打卡：先倒茶再加煉乳才會有漸層</span></li>
+                <li>🎁 <span>帶茶葉回台：茶粉 400g 約 220฿，是最熱門的伴手禮</span></li>
+                <li>💵 <span>機場分店 15% 加價，市區與百貨價格較實惠</span></li>
+            </ul>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🌐 官方資源</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-primary" href="https://chatramue.com/" target="_blank">
+                    🌐 官方網站
+                </a>
+                <a class="btn btn-outline" href="https://www.google.com/maps/search/ChaTraMue+Bangkok" target="_blank">
+                    📍 所有分店地圖
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

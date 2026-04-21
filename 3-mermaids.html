@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3 Mermaids Pattaya | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --mermaid-teal: #00ACC1;
+            --mermaid-deep: #006064;
+            --coral-pink: #FF7043;
+            --pearl-cream: #FFF3E0;
+            --sea-blue: #4FC3F7;
+            --thai-red: #DC143C;
+            --seaweed-green: #26A69A;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #004D40;
+            --text-medium: #455A64;
+            --gradient-ocean: linear-gradient(135deg, #4FC3F7, #00ACC1, #006064);
+            --gradient-coral: linear-gradient(135deg, #FF7043, #F4511E);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-ocean);
+            padding: 3rem 1rem 2.5rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.2), transparent 40%),
+                radial-gradient(circle at 85% 70%, rgba(255, 112, 67, 0.25), transparent 50%);
+            pointer-events: none;
+        }
+        .page-header::after {
+            content: '🐚 🐟 🌊';
+            position: absolute;
+            top: 20%;
+            right: 8%;
+            font-size: 1.5rem;
+            opacity: 0.35;
+            letter-spacing: 10px;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.35);
+            position: relative;
+            z-index: 1;
+        }
+        .title-en {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0, 172, 193, 0.12);
+            border-left: 6px solid var(--mermaid-teal);
+        }
+
+        .section h2 {
+            color: var(--mermaid-deep);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #E0F7FA, #B2EBF2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--mermaid-teal);
+        }
+
+        .dish-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .dish-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1.1rem;
+            border: 1px solid rgba(0, 172, 193, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .dish-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 172, 193, 0.3);
+        }
+        .dish-card.signature {
+            background: linear-gradient(135deg, #E0F7FA, #80DEEA);
+            border: 2px solid var(--mermaid-teal);
+        }
+        .dish-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .dish-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+        .dish-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+        .dish-price {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--thai-red);
+            font-size: 0.9rem;
+        }
+        .badge-signature {
+            display: inline-block;
+            background: var(--coral-pink);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .compare-table th,
+        .compare-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #E0F7FA;
+        }
+        .compare-table th {
+            background: var(--gradient-ocean);
+            color: white;
+            font-weight: 600;
+        }
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--mermaid-deep);
+            background: var(--soft-cream);
+        }
+
+        .menu-category {
+            margin-top: 1.5rem;
+        }
+        .menu-category h3 {
+            color: var(--mermaid-teal);
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px dashed rgba(0, 172, 193, 0.3);
+        }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        .menu-list li {
+            padding: 0.55rem 0.8rem;
+            margin-bottom: 0.4rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.92rem;
+        }
+        .menu-list li .price {
+            color: var(--thai-red);
+            font-weight: 600;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(0, 172, 193, 0.2);
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label {
+            font-weight: 600;
+            color: var(--mermaid-deep);
+            min-width: 95px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--text-medium);
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .tip-card {
+            background: var(--soft-cream);
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--mermaid-teal);
+            font-size: 0.9rem;
+        }
+        .tip-card strong {
+            color: var(--mermaid-deep);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.75rem 1.4rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-ocean);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 96, 100, 0.4);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--mermaid-teal);
+            border: 2px solid var(--mermaid-teal);
+        }
+        .btn-outline:hover {
+            background: var(--mermaid-teal);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--coral-pink);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.7rem; }
+            .title-en { font-size: 0.85rem; }
+            .logo { font-size: 3.2rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+            .compare-table th, .compare-table td { padding: 0.6rem 0.5rem; font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">🧜‍♀️</div>
+        <h1 class="title">3 Mermaids</h1>
+        <div class="title-en">PATTAYA · BANG SARAY</div>
+        <p class="tagline">三隻美人魚海景餐廳 · 海風日落 + 鳥巢打卡</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於 3 Mermaids</h2>
+            <p>
+                <strong>3 Mermaids Seaside Restaurant</strong> 位於 Bang Saray 海邊，
+                是芭達雅新興熱門的海景網美餐廳，以「三隻美人魚」為主題，
+                結合海邊沙灘 + 鳥巢座位 + 吊椅 + 美人魚雕塑打卡區。
+            </p>
+            <p>
+                跟 The Sky Gallery 並列芭達雅兩大<strong>鳥巢餐廳</strong>代表，
+                但 3 Mermaids <strong>更接近海平面</strong>，可以直接踩在沙灘上吃飯、拍照。
+            </p>
+            <div class="highlight-box">
+                🧜‍♀️ <strong>美人魚主題</strong>｜多個裝置藝術打卡點<br>
+                🏖️ <strong>直接坐在沙灘上</strong>｜比山崖餐廳更親海<br>
+                🌅 <strong>日落正對西方</strong>｜拍攝夕陽的完美地點
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚖️ 和 The Sky Gallery 怎麼選？</h2>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>比較項目</th>
+                        <th>3 Mermaids 🧜‍♀️</th>
+                        <th>Sky Gallery 🌅</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>地形</td>
+                        <td>海邊沙灘</td>
+                        <td>山崖高空</td>
+                    </tr>
+                    <tr>
+                        <td>視角</td>
+                        <td>平視海平線</td>
+                        <td>俯瞰海景</td>
+                    </tr>
+                    <tr>
+                        <td>主題</td>
+                        <td>美人魚 + 沙灘</td>
+                        <td>鳥巢 + 山崖</td>
+                    </tr>
+                    <tr>
+                        <td>人流</td>
+                        <td>較新、人稍少</td>
+                        <td>超熱門，要搶</td>
+                    </tr>
+                    <tr>
+                        <td>食物</td>
+                        <td>泰式 + 海鮮</td>
+                        <td>泰式 + Fusion</td>
+                    </tr>
+                    <tr>
+                        <td>價位</td>
+                        <td>人均 400-700฿</td>
+                        <td>人均 500-800฿</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="note">
+                💡 <strong>小建議</strong>：兩家都在 Bang Saray，開車只差 5 分鐘，如果時間夠可以一個傍晚看日落、另一個白天拍照。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌟 特色亮點</h2>
+            <div class="dish-grid">
+                <div class="dish-card signature">
+                    <span class="dish-emoji">🧜‍♀️</span>
+                    <div class="dish-name">美人魚打卡區 <span class="badge-signature">招牌</span></div>
+                    <div class="dish-desc">
+                        三座大型美人魚雕塑是最熱門拍照點，坐在魚尾旁拍超夢幻。
+                    </div>
+                </div>
+                <div class="dish-card signature">
+                    <span class="dish-emoji">🪹</span>
+                    <div class="dish-name">沙灘鳥巢 <span class="badge-signature">必坐</span></div>
+                    <div class="dish-desc">
+                        直接建在沙灘上的藤編鳥巢，坐進去腳還能踩沙，限時用餐。
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🕊️</span>
+                    <div class="dish-name">巨大吊椅</div>
+                    <div class="dish-desc">
+                        掛在椰子樹上的超大圓形吊椅，坐下去就像飄在空中。
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🌺</span>
+                    <div class="dish-name">熱帶花園 + 彩色餐桌</div>
+                    <div class="dish-desc">
+                        滿滿熱帶花草和彩繪餐桌，各種繽紛角落都能拍。
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🌊</span>
+                    <div class="dish-name">海邊吧檯</div>
+                    <div class="dish-desc">
+                        面海的戶外吧檯，坐高腳椅喝調酒看日落超 chill。
+                    </div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🐚</span>
+                    <div class="dish-name">貝殼裝飾裝置</div>
+                    <div class="dish-desc">
+                        巨型貝殼造型座位，海底世界主題拍照神器。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🍽️ 必點美食</h2>
+            <div class="dish-grid">
+                <div class="dish-card signature">
+                    <span class="dish-emoji">🦐</span>
+                    <div class="dish-name">海鮮拼盤 <span class="badge-signature">招牌</span></div>
+                    <div class="dish-desc">
+                        現撈魚、蝦、蟹、蛤蠣一起烤，附泰式辣椒醬。
+                    </div>
+                    <div class="dish-price">約 890฿（2-3 人份）</div>
+                </div>
+                <div class="dish-card signature">
+                    <span class="dish-emoji">🍝</span>
+                    <div class="dish-name">辣味海鮮義大利麵 <span class="badge-signature">必吃</span></div>
+                    <div class="dish-desc">
+                        蒜辣味炒海鮮義大利麵，Q 彈有嚼勁。
+                    </div>
+                    <div class="dish-price">約 320฿</div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🦞</span>
+                    <div class="dish-name">烤龍蝦</div>
+                    <div class="dish-desc">
+                        半切龍蝦奶油烤，搭蒜酥或咖哩粉都好吃。
+                    </div>
+                    <div class="dish-price">時價約 1,200฿ 起</div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🍹</span>
+                    <div class="dish-name">美人魚藍調雞尾酒</div>
+                    <div class="dish-desc">
+                        招牌藍色漸層調酒，杯口有貝殼裝飾，拍照滿分。
+                    </div>
+                    <div class="dish-price">約 280฿</div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🐟</span>
+                    <div class="dish-name">檸檬蒸魚</div>
+                    <div class="dish-desc">
+                        整條檸檬辣椒蒸魚，酸辣鮮甜超開胃。
+                    </div>
+                    <div class="dish-price">約 450฿</div>
+                </div>
+                <div class="dish-card">
+                    <span class="dish-emoji">🥭</span>
+                    <div class="dish-name">芒果糯米飯</div>
+                    <div class="dish-desc">
+                        經典泰式甜點，收尾必點。
+                    </div>
+                    <div class="dish-price">約 220฿</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 菜單價目</h2>
+
+            <div class="menu-category">
+                <h3>🦐 海鮮主菜 Seafood</h3>
+                <ul class="menu-list">
+                    <li>海鮮拼盤 Seafood Platter（2-3 人份） <span class="price">890฿</span></li>
+                    <li>烤龍蝦 Grilled Lobster <span class="price">時價 1,200฿起</span></li>
+                    <li>檸檬蒸魚 Steamed Fish with Lime <span class="price">450฿</span></li>
+                    <li>辣炒軟殼蟹 Stir-fried Soft Shell Crab <span class="price">380฿</span></li>
+                    <li>奶油蒜蝦 Butter Garlic Prawns <span class="price">320฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍲 湯 & 沙拉</h3>
+                <ul class="menu-list">
+                    <li>冬蔭功海鮮湯 Tom Yum Seafood <span class="price">280฿</span></li>
+                    <li>青木瓜沙拉 Som Tam <span class="price">150฿</span></li>
+                    <li>柚子蝦沙拉 Pomelo Shrimp Salad <span class="price">260฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍝 義式 & 輕食</h3>
+                <ul class="menu-list">
+                    <li>辣味海鮮義大利麵 Spicy Seafood Pasta <span class="price">320฿</span></li>
+                    <li>瑪格麗特披薩 Margherita Pizza <span class="price">280฿</span></li>
+                    <li>海鮮燉飯 Seafood Risotto <span class="price">380฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍚 泰式主食</h3>
+                <ul class="menu-list">
+                    <li>打拋豬飯 Pad Krapow Moo <span class="price">180฿</span></li>
+                    <li>綠咖哩雞飯 Green Curry Chicken <span class="price">220฿</span></li>
+                    <li>海鮮炒飯 Seafood Fried Rice <span class="price">260฿</span></li>
+                    <li>菠蘿炒飯 Pineapple Fried Rice <span class="price">220฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍹 飲品 & 調酒</h3>
+                <ul class="menu-list">
+                    <li>美人魚藍調雞尾酒 Mermaid Blue <span class="price">280฿</span></li>
+                    <li>Sunset Mojito 日落莫希托 <span class="price">260฿</span></li>
+                    <li>椰子水 Fresh Coconut <span class="price">120฿</span></li>
+                    <li>鮮果昔 Fruit Smoothie <span class="price">150฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍧 甜點</h3>
+                <ul class="menu-list">
+                    <li>芒果糯米飯 Mango Sticky Rice <span class="price">220฿</span></li>
+                    <li>椰奶西米露 Coconut Sago <span class="price">130฿</span></li>
+                    <li>巧克力熔岩蛋糕 Chocolate Lava Cake <span class="price">220฿</span></li>
+                </ul>
+            </div>
+
+            <div class="note">
+                💡 <strong>人均消費</strong>：約 400-700฿（不含酒）。海鮮時價依季節變動，點餐前可請店員確認。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⏰ 營業資訊</h2>
+            <div class="info-row">
+                <div class="info-label">🕐 營業時間</div>
+                <div class="info-value">每日 11:00 - 22:00</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📍 地址</div>
+                <div class="info-value">Bang Saray Beach, Sattahip（芭達雅市區南 30-40 分鐘）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🌅 日落時段</div>
+                <div class="info-value">17:30 - 18:30（最熱門、人最多）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📞 訂位</div>
+                <div class="info-value">建議提前 1-3 天訂位（官方 LINE、Facebook）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🚗 交通</div>
+                <div class="info-value">芭達雅市區包車或 Grab，車程 30-40 分</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💳 付款</div>
+                <div class="info-value">現金、信用卡</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">👗 穿著</div>
+                <div class="info-value">海邊風穿搭，涼鞋、洋裝為佳（直接踩沙）</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 拍照與用餐小撇步</h2>
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <strong>🌅 拍日落黃金 30 分</strong>
+                    日落前 30 分鐘光線最美，手機開「HDR」或人像模式。
+                </div>
+                <div class="tip-card">
+                    <strong>🧜 美人魚雕塑要排</strong>
+                    最熱門三人魚打卡點要排隊，建議非用餐時間先拍。
+                </div>
+                <div class="tip-card">
+                    <strong>👟 帶替換鞋</strong>
+                    沙灘區走路會進沙，穿涼鞋或準備小毛巾擦腳。
+                </div>
+                <div class="tip-card">
+                    <strong>🦟 防蚊液</strong>
+                    海邊傍晚有小黑蚊，建議噴防蚊再去。
+                </div>
+                <div class="tip-card">
+                    <strong>💰 低消限制</strong>
+                    熱門座位可能有低消（300-500฿/人），訂位時問清楚。
+                </div>
+                <div class="tip-card">
+                    <strong>🌙 晚一點更美</strong>
+                    天黑後點上燈串超浪漫，比日間更出片。
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🔗 查詢與導航</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-primary" href="https://www.google.com/maps/search/3+Mermaids+Pattaya+Bang+Saray" target="_blank">
+                    📍 查看地圖
+                </a>
+                <a class="btn btn-outline" href="https://www.google.com/search?q=3+Mermaids+Pattaya+reservation" target="_blank">
+                    🔍 Google 搜尋訂位
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

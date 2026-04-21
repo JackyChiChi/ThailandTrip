@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>巴哥咖啡廳 Pug Cafe | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pug-fawn: #E8C691;
+            --pug-brown: #6D4C41;
+            --pug-dark: #3E2723;
+            --pug-pink: #F48FB1;
+            --pug-cream: #FFF3E0;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #2C1810;
+            --text-medium: #5D4E37;
+            --thai-red: #DC143C;
+            --gradient-pug: linear-gradient(135deg, #D7B98E, #5D4037);
+            --gradient-warm: linear-gradient(135deg, #FFCC80, #E64A19);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-pug);
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 30%, rgba(255,243,224,0.2), transparent 60%);
+            pointer-events: none;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+            position: relative;
+            z-index: 1;
+        }
+        .title-en {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .booked-ribbon {
+            display: inline-block;
+            background: var(--thai-red);
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.8rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--pug-brown);
+        }
+
+        .section h2 {
+            color: var(--pug-dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--pug-brown);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .feature-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1.1rem;
+            border: 1px solid rgba(109, 76, 65, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .feature-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(109, 76, 65, 0.25);
+        }
+        .feature-card.signature {
+            background: linear-gradient(135deg, #FFF3E0, #FFCC80);
+            border: 2px solid var(--pug-brown);
+        }
+        .feature-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .feature-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+        .feature-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+        .badge-signature {
+            display: inline-block;
+            background: var(--thai-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .menu-category {
+            margin-top: 1.5rem;
+        }
+        .menu-category h3 {
+            color: var(--pug-brown);
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px dashed rgba(109, 76, 65, 0.3);
+        }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        .menu-list li {
+            padding: 0.55rem 0.8rem;
+            margin-bottom: 0.4rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            font-size: 0.92rem;
+        }
+        .menu-list li .price {
+            color: var(--pug-dark);
+            font-weight: 600;
+        }
+
+        .price-card {
+            background: linear-gradient(135deg, #FFFFFF, var(--pug-cream));
+            border-radius: 14px;
+            padding: 1.3rem;
+            text-align: center;
+            border: 2px dashed var(--pug-brown);
+            margin-bottom: 1rem;
+        }
+        .price-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--thai-red);
+        }
+        .price-amount .unit {
+            font-size: 1rem;
+            color: var(--text-medium);
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(109, 76, 65, 0.2);
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label {
+            font-weight: 600;
+            color: var(--pug-dark);
+            min-width: 95px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--text-medium);
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .tip-card {
+            background: var(--soft-cream);
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--pug-brown);
+            font-size: 0.9rem;
+        }
+        .tip-card strong {
+            color: var(--pug-dark);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .rules-list {
+            list-style: none;
+            padding: 0;
+        }
+        .rules-list li {
+            padding: 0.6rem 0.9rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #FFEBEE, #FFF);
+            border-left: 4px solid var(--thai-red);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+        .rules-list li .icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.75rem 1.4rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-pug);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(62, 39, 35, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--pug-brown);
+            border: 2px solid var(--pug-brown);
+        }
+        .btn-outline:hover {
+            background: var(--pug-brown);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--pug-brown);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        .preview-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .pug-preview {
+            aspect-ratio: 1;
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--pug-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--pug-fawn);
+            transition: transform 0.3s ease;
+        }
+        .pug-preview:hover {
+            transform: scale(1.05) rotate(-2deg);
+        }
+        .pug-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.8rem; }
+            .title-en { font-size: 0.85rem; }
+            .logo { font-size: 3rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">🐶</div>
+        <h1 class="title">巴哥咖啡廳</h1>
+        <div class="title-en">PUG CAFE BANGKOK</div>
+        <p class="tagline">曼谷網紅必訪 · 與一群巴哥同框喝咖啡</p>
+        <div class="booked-ribbon">📅 需要事先預約</div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於巴哥咖啡廳</h2>
+            <p>
+                曼谷巴哥咖啡廳是泰國超人氣的<strong>狗狗主題咖啡廳</strong>，店內常駐約
+                <strong>10-15 隻巴哥犬</strong>與少量其他犬種（柴犬、法鬥）自由穿梭。
+                顧客可以一邊享用咖啡、甜點，一邊跟巴哥們互動、拍照、擁抱。
+            </p>
+            <p>
+                每隻巴哥都是店貓（？）的大明星，有的愛撒嬌、有的愛睡覺、有的熱情到一坐下就跳到你腿上。
+                <strong>泰國 IG、小紅書上超火的打卡景點</strong>，行程建議預留 1-1.5 小時。
+            </p>
+            <div class="highlight-box">
+                🐶 <strong>10-15 隻巴哥</strong>隨意互動<br>
+                📸 <strong>拍照天堂</strong>：巴哥們超會擺 pose<br>
+                ⏰ <strong>入場時間制</strong>：每場 1 小時，需事先預約
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🐶 店內巴哥先睹為快</h2>
+            <p style="font-size: 0.9rem;">預告一下你會遇到的可愛巴哥們：</p>
+            <div class="preview-gallery">
+                <div class="pug-preview"><img src="images/Day5_dog1.png" alt="睡覺的巴哥"></div>
+                <div class="pug-preview"><img src="images/Day5_dog2.png" alt="玩水的巴哥"></div>
+                <div class="pug-preview"><img src="images/Day5_dog3.png" alt="按摩的巴哥"></div>
+                <div class="pug-preview"><img src="images/Day5_dog4.png" alt="逛街的巴哥"></div>
+                <div class="pug-preview"><img src="images/Day5_dog5.png" alt="採購的巴哥"></div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌟 特色亮點</h2>
+            <div class="feature-grid">
+                <div class="feature-card signature">
+                    <span class="feature-emoji">🤗</span>
+                    <div class="feature-name">自由互動 <span class="badge-signature">招牌</span></div>
+                    <div class="feature-desc">
+                        不是玻璃隔間看狗，而是巴哥們在你腿上、桌上、肩膀上自由走動。
+                    </div>
+                </div>
+                <div class="feature-card signature">
+                    <span class="feature-emoji">📸</span>
+                    <div class="feature-name">超好拍 <span class="badge-signature">IG 熱門</span></div>
+                    <div class="feature-desc">
+                        巴哥的大眼睛扁臉是天生的網美，隨便拍都是爆款。
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-emoji">🦴</span>
+                    <div class="feature-name">可買零食餵食</div>
+                    <div class="feature-desc">
+                        店內販售狗狗零食（約 50฿），買了就會被巴哥們包圍。
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-emoji">☕</span>
+                    <div class="feature-name">飲品 & 甜點</div>
+                    <div class="feature-desc">
+                        手沖咖啡、奶茶、泰式飲品、蛋糕，品質不錯，單價中等。
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-emoji">🎂</span>
+                    <div class="feature-name">巴哥造型甜點</div>
+                    <div class="feature-desc">
+                        巴哥臉造型的馬卡龍、慕斯蛋糕，可愛到捨不得吃。
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <span class="feature-emoji">🏪</span>
+                    <div class="feature-name">巴哥周邊商品</div>
+                    <div class="feature-desc">
+                        T-shirt、貼紙、鑰匙圈、明信片，適合買回家當紀念。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 入場方式</h2>
+            <div class="price-card">
+                <div style="font-size: 0.95rem; color: var(--text-medium); margin-bottom: 0.5rem;">入場最低消費</div>
+                <div class="price-amount">350 - 450<span class="unit">฿ / 人</span></div>
+                <div style="font-size: 0.85rem; color: var(--text-medium); margin-top: 0.4rem;">1 小時 · 包含 1 杯飲料 + 零食</div>
+            </div>
+            <ul class="menu-list">
+                <li>入場費含 1 杯飲料 <span class="price">約 350฿</span></li>
+                <li>入場費含 1 杯飲料 + 甜點 <span class="price">約 450฿</span></li>
+                <li>加點餐點（甜點、輕食） <span class="price">120-250฿</span></li>
+                <li>狗狗零食（可買來餵食） <span class="price">50฿</span></li>
+            </ul>
+            <div class="note">
+                💡 詳細價格依分店與方案而異，<strong>建議透過 Klook / KKday 購買套票</strong>，通常比現場便宜 10-15%，且保證有位。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>☕ 飲料 & 餐點菜單</h2>
+
+            <div class="menu-category">
+                <h3>☕ 咖啡 Coffee</h3>
+                <ul class="menu-list">
+                    <li>美式咖啡 Americano <span class="price">80฿</span></li>
+                    <li>拿鐵 Latte <span class="price">95฿</span></li>
+                    <li>摩卡 Mocha <span class="price">110฿</span></li>
+                    <li>焦糖瑪奇朵 Caramel Macchiato <span class="price">120฿</span></li>
+                    <li>冰滴咖啡 Cold Brew <span class="price">110฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🥤 泰式飲料 Thai Drinks</h3>
+                <ul class="menu-list">
+                    <li>泰式奶茶 Thai Milk Tea <span class="price">85฿</span></li>
+                    <li>泰式綠茶 Thai Green Tea <span class="price">85฿</span></li>
+                    <li>玫瑰奶茶 Rose Milk Tea <span class="price">95฿</span></li>
+                    <li>檸檬蜂蜜 Honey Lemon <span class="price">80฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍰 甜點 Desserts</h3>
+                <ul class="menu-list">
+                    <li>巴哥造型馬卡龍 Pug Macaron（單顆） <span class="price">120฿</span></li>
+                    <li>巴哥臉蛋糕 Pug Mousse Cake <span class="price">180฿</span></li>
+                    <li>肉桂卷 Cinnamon Roll <span class="price">95฿</span></li>
+                    <li>布朗尼 Chocolate Brownie <span class="price">110฿</span></li>
+                    <li>手工冰淇淋 Homemade Ice Cream <span class="price">90฿</span></li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🥪 輕食 Light Meal</h3>
+                <ul class="menu-list">
+                    <li>火腿起司三明治 Ham & Cheese Sandwich <span class="price">180฿</span></li>
+                    <li>炸薯條 French Fries <span class="price">120฿</span></li>
+                    <li>鬆餅拼盤 Waffle Platter <span class="price">220฿</span></li>
+                    <li>義大利麵 Pasta <span class="price">250฿</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⏰ 營業資訊</h2>
+            <div class="info-row">
+                <div class="info-label">🕐 營業時間</div>
+                <div class="info-value">11:00 - 20:00（最後入場 19:00）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📅 預約</div>
+                <div class="info-value"><strong style="color: var(--thai-red);">強烈建議提前 1-2 天預約</strong>，週末常爆滿</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">⏱️ 每場時限</div>
+                <div class="info-value">60-90 分鐘（人多時限時更嚴格）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💳 付款</div>
+                <div class="info-value">現金、信用卡、QR 支付</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">👶 兒童</div>
+                <div class="info-value">5 歲以下建議有大人陪同，避免驚嚇巴哥</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🌐 語言</div>
+                <div class="info-value">泰文、英文為主，可下載 Google 翻譯</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ 店內規則（務必遵守）</h2>
+            <ul class="rules-list">
+                <li><span class="icon">🧼</span><div>進店前需 <strong>洗手 + 酒精消毒</strong>，部分分店還要穿店內鞋套</div></li>
+                <li><span class="icon">📷</span><div><strong>禁止閃光燈拍照</strong>，會嚇到巴哥</div></li>
+                <li><span class="icon">🚫</span><div>不能抱起巴哥、強行摸頭或抓尾巴</div></li>
+                <li><span class="icon">🐕</span><div>不能餵食自己帶的食物（只能買店內販售的零食）</div></li>
+                <li><span class="icon">😴</span><div>巴哥睡覺時<strong>不要吵醒</strong>，讓牠們好好休息</div></li>
+                <li><span class="icon">👶</span><div>小小孩請家長看好，避免踩到狗狗</div></li>
+                <li><span class="icon">🎒</span><div>大型包包寄存置物櫃，避免撞到狗狗</div></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>💡 拍照與互動小撇步</h2>
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <strong>🦴 買零食是王道</strong>
+                    一袋 50฿ 的零食能讓巴哥們瞬間圍過來，拍照效果滿分。
+                </div>
+                <div class="tip-card">
+                    <strong>📱 手機拍照模式</strong>
+                    用人像模式 + 連拍，巴哥動得快很難抓對焦。
+                </div>
+                <div class="tip-card">
+                    <strong>👕 穿素色衣服</strong>
+                    巴哥毛會掉，穿深色或素色衣服照片比較好看。
+                </div>
+                <div class="tip-card">
+                    <strong>🕐 避開尖峰時段</strong>
+                    平日下午 14-16 點人最少，巴哥也最有精神。
+                </div>
+                <div class="tip-card">
+                    <strong>🤫 安靜互動</strong>
+                    小聲說話、動作輕柔，巴哥會比較親近你。
+                </div>
+                <div class="tip-card">
+                    <strong>👃 做好心理準備</strong>
+                    店內有狗狗味是正常的，但都打掃得很乾淨。
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🔗 查詢與導航</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-primary" href="https://www.google.com/maps/search/Pug+Cafe+Bangkok" target="_blank">
+                    📍 查看地圖
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jomtien Complex Walking Street | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --neon-pink: #FF1493;
+            --neon-purple: #9C27B0;
+            --neon-blue: #3F51B5;
+            --neon-cyan: #00E5FF;
+            --rainbow-red: #FF1744;
+            --rainbow-orange: #FF9100;
+            --rainbow-yellow: #FFEA00;
+            --rainbow-green: #00E676;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #1A0B2E;
+            --text-medium: #5D4E37;
+            --gradient-night: linear-gradient(135deg, #FF1493 0%, #9C27B0 50%, #3F51B5 100%);
+            --gradient-rainbow: linear-gradient(90deg, #FF1744, #FF9100, #FFEA00, #00E676, #00E5FF, #3F51B5, #9C27B0);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-night);
+            padding: 3rem 1rem 2.5rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 20% 30%, rgba(0, 229, 255, 0.25), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(255, 234, 0, 0.2), transparent 40%),
+                radial-gradient(circle at 50% 95%, rgba(255, 20, 147, 0.3), transparent 50%);
+            pointer-events: none;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-rainbow);
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.5));
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.3rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            text-shadow: 0 2px 15px rgba(0,0,0,0.4), 0 0 30px rgba(255, 20, 147, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+        .title-en {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+            font-weight: 500;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 25px rgba(156, 39, 176, 0.12);
+            border-left: 6px solid var(--neon-purple);
+        }
+
+        .section h2 {
+            color: var(--neon-purple);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--neon-pink);
+        }
+
+        .venue-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .venue-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1.1rem;
+            border: 1px solid rgba(156, 39, 176, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .venue-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-rainbow);
+        }
+        .venue-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(156, 39, 176, 0.25);
+        }
+        .venue-card.famous {
+            background: linear-gradient(135deg, #F3E5F5, #E1BEE7);
+            border: 2px solid var(--neon-purple);
+        }
+        .venue-emoji {
+            font-size: 2.3rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .venue-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+        .venue-type {
+            font-size: 0.75rem;
+            display: inline-block;
+            background: var(--neon-purple);
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-bottom: 0.5rem;
+        }
+        .venue-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(156, 39, 176, 0.2);
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label {
+            font-weight: 600;
+            color: var(--neon-purple);
+            min-width: 95px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--text-medium);
+        }
+
+        .compare-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+        }
+        .compare-table th,
+        .compare-table td {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #F3E5F5;
+        }
+        .compare-table th {
+            background: var(--gradient-night);
+            color: white;
+            font-weight: 600;
+        }
+        .compare-table td:first-child {
+            font-weight: 600;
+            color: var(--neon-purple);
+            background: var(--soft-cream);
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .tip-card {
+            background: var(--soft-cream);
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--neon-pink);
+            font-size: 0.9rem;
+        }
+        .tip-card strong {
+            color: var(--neon-purple);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .safety-list {
+            list-style: none;
+            padding: 0;
+        }
+        .safety-list li {
+            padding: 0.7rem 1rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, #FFEBEE, #FFF);
+            border-left: 4px solid var(--rainbow-red);
+            border-radius: 8px;
+            font-size: 0.92rem;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+        }
+        .safety-list li .icon {
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .schedule-timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .timeline-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+            padding: 0.9rem 1rem;
+            background: var(--soft-cream);
+            border-radius: 12px;
+            border-left: 4px solid var(--neon-cyan);
+        }
+        .timeline-time {
+            font-weight: 700;
+            color: var(--neon-purple);
+            min-width: 110px;
+            font-size: 0.9rem;
+        }
+        .timeline-content {
+            flex: 1;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-night);
+            color: white;
+            box-shadow: 0 4px 15px rgba(156, 39, 176, 0.3);
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(156, 39, 176, 0.5);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--neon-purple);
+            border: 2px solid var(--neon-purple);
+        }
+        .btn-outline:hover {
+            background: var(--neon-purple);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--rainbow-orange);
+            padding: 0.9rem 1.1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.6rem; }
+            .title-en { font-size: 0.8rem; letter-spacing: 2px; }
+            .logo { font-size: 3.2rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+            .compare-table th, .compare-table td { padding: 0.6rem 0.5rem; font-size: 0.82rem; }
+            .timeline-time { min-width: 85px; font-size: 0.82rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">🌈</div>
+        <h1 class="title">Jomtien Complex</h1>
+        <div class="title-en">WALKING STREET · PATTAYA</div>
+        <p class="tagline">芭達雅 LGBTQ+ 夜生活天堂 · 酒吧、Show、Sunset</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於 Jomtien Complex Walking Street</h2>
+            <p>
+                <strong>Jomtien Complex</strong> 位於芭達雅南區 Jomtien 海邊（Soi Welcome Town），
+                是亞洲最知名的 <strong>LGBTQ+ 友善娛樂區</strong>之一，吸引全球彩虹族群前來。
+            </p>
+            <p>
+                整條 Walking Street 約 <strong>200 公尺</strong>，集結 <strong>30+ 間</strong>
+                酒吧、Cabaret、按摩店、餐廳與旅館。氣氛比主 Walking Street 更自在、多元，
+                從 Go-go Bar、露天啤酒屋到變裝秀都有。
+            </p>
+            <div class="highlight-box">
+                🌈 <strong>LGBTQ+ 友善</strong>｜亞洲規模數一數二的彩虹街區<br>
+                🏖️ <strong>步行可達海灘</strong>｜晚風配夜生活<br>
+                🕘 <strong>越晚越熱鬧</strong>｜黃金時段 21:00 - 02:00
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏛️ 熱門場所</h2>
+            <div class="venue-grid">
+                <div class="venue-card famous">
+                    <span class="venue-emoji">🌊</span>
+                    <div class="venue-name">The Oxygen Beach Bar</div>
+                    <span class="venue-type">沙灘酒吧</span>
+                    <div class="venue-desc">
+                        Jomtien 海邊的標誌性沙灘酒吧，日落時段超 chill，是 Pre-party 熱門點。
+                    </div>
+                </div>
+                <div class="venue-card famous">
+                    <span class="venue-emoji">👠</span>
+                    <div class="venue-name">Cabaret Shows</div>
+                    <span class="venue-type">變裝秀</span>
+                    <div class="venue-desc">
+                        晚間 22:00 / 23:30 兩場變裝秀，泰國 Kathoey 傳統表演，門票約 300-500฿。
+                    </div>
+                </div>
+                <div class="venue-card">
+                    <span class="venue-emoji">🍺</span>
+                    <div class="venue-name">Beer Bars 露天酒吧</div>
+                    <span class="venue-type">酒吧</span>
+                    <div class="venue-desc">
+                        整條街兩側各 10+ 間，啤酒 80-120฿，可坐外面看來往人潮。
+                    </div>
+                </div>
+                <div class="venue-card">
+                    <span class="venue-emoji">🎤</span>
+                    <div class="venue-name">Karaoke Bars</div>
+                    <span class="venue-type">KTV</span>
+                    <div class="venue-desc">
+                        英泰文流行歌都有，包廂制小費制，適合小團體唱到深夜。
+                    </div>
+                </div>
+                <div class="venue-card">
+                    <span class="venue-emoji">💆</span>
+                    <div class="venue-name">Massage Spas</div>
+                    <span class="venue-type">按摩</span>
+                    <div class="venue-desc">
+                        正規泰式按摩 200-400฿，逛街累了適合放鬆一下。
+                    </div>
+                </div>
+                <div class="venue-card">
+                    <span class="venue-emoji">🍜</span>
+                    <div class="venue-name">街邊小吃 & 餐廳</div>
+                    <span class="venue-type">美食</span>
+                    <div class="venue-desc">
+                        泰式炒粿條、烤肉串、披薩、漢堡，40-200฿ 就能吃飽。
+                    </div>
+                </div>
+            </div>
+            <div class="note">
+                💡 以上為常駐類型，每年會有新店進駐或結束營業，實際以現場為準。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚖️ 與主 Pattaya Walking Street 差異</h2>
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>比較項目</th>
+                        <th>Jomtien Complex 🌈</th>
+                        <th>Pattaya Walking Street 🎉</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>位置</td>
+                        <td>南邊 Jomtien 海邊</td>
+                        <td>北邊芭達雅海灘</td>
+                    </tr>
+                    <tr>
+                        <td>氣氛</td>
+                        <td>LGBTQ+ 友善、悠閒</td>
+                        <td>觀光客多、熱鬧</td>
+                    </tr>
+                    <tr>
+                        <td>規模</td>
+                        <td>小而精緻</td>
+                        <td>非常大</td>
+                    </tr>
+                    <tr>
+                        <td>夜生活</td>
+                        <td>彩虹酒吧、變裝秀</td>
+                        <td>夜店、酒吧、Go-go</td>
+                    </tr>
+                    <tr>
+                        <td>消費</td>
+                        <td>中等</td>
+                        <td>觀光客加價</td>
+                    </tr>
+                    <tr>
+                        <td>適合</td>
+                        <td>想自在聊天喝酒</td>
+                        <td>想體驗泰國夜生活</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>🕐 最佳時段規劃</h2>
+            <div class="schedule-timeline">
+                <div class="timeline-item">
+                    <div class="timeline-time">17:30 - 19:00</div>
+                    <div class="timeline-content">
+                        <strong>🌅 海灘日落時段</strong>：先到 The Oxygen Beach Bar 看日落、喝 Welcome Drink
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">19:00 - 21:00</div>
+                    <div class="timeline-content">
+                        <strong>🍽️ 晚餐時段</strong>：在 Complex 區吃泰式料理或西式，價位中等
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">21:00 - 22:30</div>
+                    <div class="timeline-content">
+                        <strong>🍹 酒吧熱身</strong>：露天 Beer Bar 喝調酒聊天，開始熱鬧起來
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">22:00 或 23:30</div>
+                    <div class="timeline-content">
+                        <strong>👠 變裝秀</strong>：選一場 Cabaret Show，約 60-75 分鐘
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">24:00 - 02:00</div>
+                    <div class="timeline-content">
+                        <strong>🎉 高潮時段</strong>：整條街最熱鬧，可以跳酒吧 pub crawl
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-time">02:00 - 03:00</div>
+                    <div class="timeline-content">
+                        <strong>🚕 返程</strong>：叫 Grab/Bolt 回飯店，避免沿路攬客嘟嘟車
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⏰ 營業資訊</h2>
+            <div class="info-row">
+                <div class="info-label">🕐 整體時段</div>
+                <div class="info-value">白天較安靜、<strong>晚上 19:00 - 凌晨 02:00</strong>最熱鬧</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📍 地址</div>
+                <div class="info-value">Jomtien Beach, Soi Welcome Town（芭達雅南區）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🚗 交通</div>
+                <div class="info-value">市區 Grab 約 80-120฿、雙條車 50-100฿</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💰 消費</div>
+                <div class="info-value">啤酒 80-120฿、調酒 180-280฿、變裝秀票 300-500฿</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💳 付款</div>
+                <div class="info-value">現金為主，大型場所接受信用卡</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🌐 語言</div>
+                <div class="info-value">英文通用，部分員工略懂中文</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 遊玩小撇步</h2>
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <strong>🌅 早點到看日落</strong>
+                    先去 Oxygen Beach Bar 看日落，天色暗了再回 Complex 跳酒吧。
+                </div>
+                <div class="tip-card">
+                    <strong>🍺 價格先問</strong>
+                    每家 Bar 價格差異大，點單前先看 Menu 避免糾紛。
+                </div>
+                <div class="tip-card">
+                    <strong>💰 帶小額現金</strong>
+                    準備 20-100฿ 泰銖小鈔，付小費或小攤方便。
+                </div>
+                <div class="tip-card">
+                    <strong>📸 拍照前先問</strong>
+                    拍變裝皇后或他人務必先詢問，尊重個人隱私。
+                </div>
+                <div class="tip-card">
+                    <strong>💃 變裝秀提早訂</strong>
+                    熱門時段（22:00）常客滿，可當天下午去訂位。
+                </div>
+                <div class="tip-card">
+                    <strong>🌈 放輕鬆做自己</strong>
+                    這是彩虹友善區，每個人都受尊重，盡情享受派對氣氛。
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚠️ 安全注意</h2>
+            <ul class="safety-list">
+                <li><span class="icon">👜</span><div><strong>財物貼身</strong> — 人多擁擠，包包背前面、貴重物品不外露</div></li>
+                <li><span class="icon">🍸</span><div><strong>飲料看緊</strong> — 不喝陌生人遞的飲料，離開座位不喝剩下的</div></li>
+                <li><span class="icon">🚫</span><div><strong>拒絕毒品</strong> — 泰國法律嚴厲，絕對不要嘗試</div></li>
+                <li><span class="icon">💵</span><div><strong>消費確認</strong> — 點單前先問價格、帳單逐條檢查</div></li>
+                <li><span class="icon">👥</span><div><strong>結伴同行</strong> — 跟朋友同行更安全，失散記得約集合點</div></li>
+                <li><span class="icon">🚕</span><div><strong>回程叫車</strong> — 用 Grab/Bolt 最安全，避免不明計程車</div></li>
+                <li><span class="icon">🆘</span><div><strong>緊急電話</strong> — 觀光警察 1155、救護 1669</div></li>
+            </ul>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🔗 查詢與導航</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-primary" href="https://www.google.com/maps/search/Jomtien+Complex+Walking+Street" target="_blank">
+                    📍 查看地圖
+                </a>
+                <a class="btn btn-outline" href="https://www.google.com/maps/search/The+Oxygen+Beach+Bar+Jomtien" target="_blank">
+                    🌊 The Oxygen Beach
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

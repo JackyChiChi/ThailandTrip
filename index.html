@@ -676,7 +676,7 @@
                     </div>
                     <div class="action-buttons">
                         <button class="btn btn-primary" onclick="openMap('Suvarnabhumi Airport')">📍 機場地圖</button>
-                        <button class="btn btn-secondary" onclick="openMap('ChaTraMue Suvarnabhumi')">🍵 手標茶</button>
+                        <a class="btn btn-secondary" href="chatramue.html?from=day1" style="text-decoration:none">🍵 手標茶介紹</a>
                     </div>
                 </div>
 
@@ -718,7 +718,7 @@
                         <div class="option"><label>• 備註景點：La marche、The Light</label></div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Pattaya')">🏬 Terminal 21</button>
+                        <a class="btn btn-primary" href="terminal21-pattaya.html?from=day1" style="text-decoration:none">🏬 Terminal 21 介紹</a>
                         <button class="btn btn-secondary" onclick="openMap('La Marche Pattaya')">🛍️ La marche</button>
                     </div>
                 </div>
@@ -832,7 +832,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Khao Kheow Open Zoo')">🦒 綠山動物園</button>
+                        <a class="btn btn-primary" href="khao-kheow-zoo.html?from=day2" style="text-decoration:none">🦒 綠山動物園介紹</a>
                     </div>
                 </div>
 
@@ -851,8 +851,8 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('The Sky Gallery Pattaya')">🌅 The Sky Gallery</button>
-                        <button class="btn btn-secondary" onclick="openMap('3 Mermaids Pattaya')">🧜 3 Mermaids</button>
+                        <a class="btn btn-primary" href="sky-gallery.html?from=day2" style="text-decoration:none">🌅 Sky Gallery 介紹</a>
+                        <a class="btn btn-secondary" href="3-mermaids.html?from=day2" style="text-decoration:none">🧜 3 Mermaids 介紹</a>
                     </div>
                 </div>
 
@@ -865,7 +865,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Jomtien Complex Walking Street')">🍹 Jomtien Complex</button>
+                        <a class="btn btn-primary" href="jomtien-complex.html?from=day2" style="text-decoration:none">🍹 Jomtien Complex 介紹</a>
                     </div>
                 </div>
             </div>
@@ -911,7 +911,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Terminal 21 Pattaya')">🏬 Terminal 21</button>
+                        <a class="btn btn-primary" href="terminal21-pattaya.html?from=day3" style="text-decoration:none">🏬 Terminal 21 介紹</a>
                     </div>
                 </div>
 
@@ -924,7 +924,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openDetails('circuit')">🎉 Festival 詳情</button>
+                        <a class="btn btn-primary" href="circuit-festival.html?from=day3" style="text-decoration:none">🎉 Circuit Festival 介紹</a>
                         <button class="btn btn-secondary" onclick="openMap('The Zign Hotel Pattaya')">📍 The Zign</button>
                     </div>
                 </div>
@@ -1030,7 +1030,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('The Prime Massage Bangkok')">💆 The Prime Massage</button>
+                        <a class="btn btn-primary" href="prime-massage.html?from=day4" style="text-decoration:none">💆 The Prime Massage 介紹</a>
                     </div>
                 </div>
 
@@ -1049,7 +1049,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Pug Cafe Bangkok')">🐶 巴哥咖啡廳</button>
+                        <a class="btn btn-primary" href="pug-cafe.html?from=day4" style="text-decoration:none">🐶 巴哥咖啡廳介紹</a>
                     </div>
                 </div>
 
@@ -1143,7 +1143,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Somboon Seafood Bangkok')">🦀 建興酒家</button>
+                        <a class="btn btn-primary" href="somboon.html?from=day5" style="text-decoration:none">🦀 建興酒家介紹</a>
                     </div>
                 </div>
 
@@ -1183,7 +1183,7 @@
                     </div>
                     <div class="action-buttons">
                         <button class="btn btn-primary" onclick="window.open('https://web.hungryhub.com/zh_hant/restaurants/copper-beyond-buffet-gaysorn-amarin-hungry-hub-bangkok/web', '_blank')">🍽️ HungryHub 訂位</button>
-                        <button class="btn btn-secondary" onclick="openMap('Copper Beyond Buffet Gaysorn Amarin')">📍 地圖</button>
+                        <a class="btn btn-secondary" href="copper-buffet.html?from=day5" style="text-decoration:none">🦞 Copper 介紹</a>
                     </div>
                 </div>
 
@@ -1287,7 +1287,7 @@
                         </div>
                     </div>
                     <div class="action-buttons">
-                        <button class="btn btn-primary" onclick="openMap('Somboon Seafood Bangkok')">🦀 建興酒家</button>
+                        <a class="btn btn-primary" href="somboon.html?from=day6" style="text-decoration:none">🦀 建興酒家介紹</a>
                     </div>
                 </div>
 
@@ -1775,12 +1775,27 @@
             updateCountdown();
             setupCheckboxes();
             loadCompletedItems();
-            
+
             // 載入所有天的照片
             ['day1', 'day2', 'day3', 'day4', 'day5', 'day6'].forEach(dayId => {
                 renderPhotos(dayId);
             });
-            
+
+            // 從 URL hash 切換到指定分頁（從介紹頁返回時使用）
+            const validTabs = ['notes', 'day1', 'day2', 'day3', 'day4', 'day5', 'day6'];
+            const hashTab = window.location.hash.replace('#', '');
+            if (validTabs.includes(hashTab)) {
+                switchTab(hashTab);
+            }
+
+            // hash 變化時也切換（例如用瀏覽器上一頁）
+            window.addEventListener('hashchange', function() {
+                const newTab = window.location.hash.replace('#', '');
+                if (validTabs.includes(newTab)) {
+                    switchTab(newTab);
+                }
+            });
+
             // 每分鐘更新倒數計時
             setInterval(updateCountdown, 60000);
         });

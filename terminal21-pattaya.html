@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terminal 21 Pattaya | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --sky-blue: #1976D2;
+            --sky-dark: #0D47A1;
+            --sky-light: #64B5F6;
+            --aviation-orange: #FF6F00;
+            --thai-red: #DC143C;
+            --gold-accent: #FFB300;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #1A237E;
+            --text-medium: #5D4E37;
+            --gradient-sky: linear-gradient(135deg, #1976D2, #0D47A1);
+            --gradient-sunset: linear-gradient(135deg, #FF6F00, #E65100);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-sky);
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 15% 20%, rgba(255, 179, 0, 0.2), transparent 40%),
+                radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.15), transparent 40%);
+            pointer-events: none;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4.5rem;
+            margin-bottom: 0.3rem;
+            position: relative;
+            z-index: 1;
+            filter: drop-shadow(0 3px 8px rgba(0,0,0,0.3));
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+            position: relative;
+            z-index: 1;
+        }
+        .title-en {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(25, 118, 210, 0.1);
+            border-left: 6px solid var(--sky-blue);
+        }
+
+        .section h2 {
+            color: var(--sky-dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #E3F2FD, #BBDEFB);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--sky-blue);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background: var(--soft-cream);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(25, 118, 210, 0.2);
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--sky-dark);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            margin-top: 0.2rem;
+        }
+
+        .floor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .floor-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1.2rem;
+            border: 1px solid rgba(25, 118, 210, 0.2);
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .floor-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(25, 118, 210, 0.25);
+        }
+        .floor-card.foodcourt {
+            background: linear-gradient(135deg, #FFF3E0, #FFCC80);
+            border: 2px solid var(--aviation-orange);
+        }
+        .floor-tag {
+            position: absolute;
+            top: 0.75rem;
+            right: 0.75rem;
+            background: var(--sky-blue);
+            color: white;
+            padding: 0.2rem 0.7rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .floor-card.foodcourt .floor-tag {
+            background: var(--aviation-orange);
+        }
+        .floor-emoji {
+            font-size: 2.3rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .floor-city {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 1.15rem;
+            margin-bottom: 0.3rem;
+        }
+        .floor-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .food-card {
+            background: white;
+            border-radius: 14px;
+            padding: 1.1rem;
+            border: 2px solid rgba(25, 118, 210, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .food-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 111, 0, 0.25);
+            border-color: var(--aviation-orange);
+        }
+        .food-card.must-eat {
+            background: linear-gradient(135deg, #FFF8E1, #FFE082);
+            border: 2px solid var(--gold-accent);
+        }
+        .food-card.famous {
+            background: linear-gradient(135deg, #FFF3E0, #FFCC80);
+            border: 2px solid var(--aviation-orange);
+        }
+        .food-emoji {
+            font-size: 2.2rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .food-name {
+            font-weight: 700;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.08rem;
+        }
+        .food-floor {
+            display: inline-block;
+            background: var(--sky-blue);
+            color: white;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.72rem;
+            margin-bottom: 0.5rem;
+        }
+        .food-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-bottom: 0.5rem;
+        }
+        .food-price {
+            font-weight: 600;
+            color: var(--thai-red);
+            font-size: 0.92rem;
+        }
+        .badge-must {
+            display: inline-block;
+            background: var(--thai-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+        .badge-famous {
+            display: inline-block;
+            background: var(--aviation-orange);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(25, 118, 210, 0.2);
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label {
+            font-weight: 600;
+            color: var(--sky-dark);
+            min-width: 95px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--text-medium);
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .tip-card {
+            background: var(--soft-cream);
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--aviation-orange);
+            font-size: 0.9rem;
+        }
+        .tip-card strong {
+            color: var(--sky-dark);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.75rem 1.4rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-sky);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(13, 71, 161, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--sky-blue);
+            border: 2px solid var(--sky-blue);
+        }
+        .btn-outline:hover {
+            background: var(--sky-blue);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--gold-accent);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.7rem; }
+            .title-en { font-size: 0.85rem; }
+            .logo { font-size: 3.5rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">✈️</div>
+        <h1 class="title">Terminal 21 Pattaya</h1>
+        <div class="title-en">AIRPORT · THEMED · MALL</div>
+        <p class="tagline">環遊世界的購物中心 · 一站吃遍各國美食</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於 Terminal 21 Pattaya</h2>
+            <p>
+                <strong>Terminal 21</strong> 是泰國知名的「機場主題購物中心」，
+                每層樓模擬一座世界知名城市 — 巴黎、倫敦、東京、舊金山、加勒比海…
+                走一趟 Terminal 21 就像環遊世界一圈。
+            </p>
+            <p>
+                芭達雅的 Terminal 21 位於 North Pattaya Road（近海邊），
+                <strong>2018 年開幕</strong>，是芭達雅最大的購物中心之一，
+                也是<strong>行程第一天（6/18）推薦逛街點</strong>。
+            </p>
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <span class="stat-number">7</span>
+                    <div class="stat-label">主題樓層</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">500+</span>
+                    <div class="stat-label">品牌商店</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">50+</span>
+                    <div class="stat-label">餐廳美食</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">40฿起</span>
+                    <div class="stat-label">平民美食街</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ 樓層主題導覽</h2>
+            <p>每一層都是不同城市主題，裝潢與拍照點超多！</p>
+            <div class="floor-grid">
+                <div class="floor-card">
+                    <span class="floor-tag">G</span>
+                    <span class="floor-emoji">🗼</span>
+                    <div class="floor-city">巴黎 Paris</div>
+                    <div class="floor-desc">時尚品牌、巴黎街頭咖啡館風格，入口艾菲爾鐵塔打卡。</div>
+                </div>
+                <div class="floor-card foodcourt">
+                    <span class="floor-tag">M</span>
+                    <span class="floor-emoji">🏝️</span>
+                    <div class="floor-city">加勒比海 Caribbean</div>
+                    <div class="floor-desc"><strong>Pier 21 平民美食街</strong>，40-100฿ 吃飽飽，<strong>必訪</strong>！</div>
+                </div>
+                <div class="floor-card">
+                    <span class="floor-tag">1F</span>
+                    <span class="floor-emoji">🎡</span>
+                    <div class="floor-city">倫敦 London</div>
+                    <div class="floor-desc">紅色電話亭、地鐵標誌，女裝飾品、化妝品店為主。</div>
+                </div>
+                <div class="floor-card">
+                    <span class="floor-emoji">🗾</span>
+                    <span class="floor-tag">2F</span>
+                    <div class="floor-city">東京 Tokyo</div>
+                    <div class="floor-desc">櫻花、鳥居、和風店鋪，日系雜貨、動漫周邊可挖寶。</div>
+                </div>
+                <div class="floor-card">
+                    <span class="floor-tag">3F</span>
+                    <span class="floor-emoji">🌉</span>
+                    <div class="floor-city">舊金山 San Francisco</div>
+                    <div class="floor-desc">金門大橋、電車主題，電影院、運動品牌、餐廳。</div>
+                </div>
+                <div class="floor-card">
+                    <span class="floor-tag">4F</span>
+                    <span class="floor-emoji">🕌</span>
+                    <div class="floor-city">伊斯坦堡 Istanbul</div>
+                    <div class="floor-desc">奢華土耳其風，餐廳酒吧、家居品牌。</div>
+                </div>
+                <div class="floor-card">
+                    <span class="floor-tag">5F</span>
+                    <span class="floor-emoji">🎬</span>
+                    <div class="floor-city">好萊塢 Hollywood</div>
+                    <div class="floor-desc">電影星光大道主題，泰國連鎖餐廳、娛樂設施。</div>
+                </div>
+            </div>
+            <div class="note">
+                💡 廁所很會設計！每層廁所都是該城市主題，超好拍 — 巴黎層是凱旋門、東京層是澀谷十字路口。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🍴 必吃餐廳 · 美食推薦</h2>
+            <p>從銅板美食到高級餐廳都有，這裡挑出 <strong>8 家必試</strong>：</p>
+            <div class="food-grid">
+                <div class="food-card must-eat">
+                    <span class="food-emoji">🏖️</span>
+                    <div class="food-name">Pier 21 美食街 <span class="badge-must">必訪</span></div>
+                    <span class="food-floor">M 樓 · 加勒比海層</span>
+                    <div class="food-desc">
+                        <strong>第一次到泰國一定要來的平民美食聖地！</strong>
+                        冬蔭功、泰式炒河粉、咖哩飯、雞肉飯、芒果糯米飯…
+                        幾乎所有泰式名菜都有，價格親民到爆。
+                    </div>
+                    <div class="food-price">💰 40 - 120฿ / 道</div>
+                </div>
+                <div class="food-card must-eat">
+                    <span class="food-emoji">🍧</span>
+                    <div class="food-name">After You Dessert Cafe <span class="badge-must">必吃</span></div>
+                    <span class="food-floor">G 樓 · 巴黎層</span>
+                    <div class="food-desc">
+                        泰國最紅的甜點店！<strong>蜜糖吐司（Shibuya Toast）</strong>、
+                        <strong>草莓煉乳剉冰</strong>是招牌，鬆鬆軟軟的吐司上滿滿冰淇淋與糖霜。
+                    </div>
+                    <div class="food-price">💰 180 - 320฿</div>
+                </div>
+                <div class="food-card famous">
+                    <span class="food-emoji">🍲</span>
+                    <div class="food-name">MK Restaurant <span class="badge-famous">人氣</span></div>
+                    <span class="food-floor">2F · 東京層</span>
+                    <div class="food-desc">
+                        泰國國民火鍋連鎖，清湯鍋底 + 新鮮海鮮、肉類，蘸料獨特。
+                        單點或套餐都划算，本地人最愛的家庭聚餐地。
+                    </div>
+                    <div class="food-price">💰 300 - 500฿ / 人</div>
+                </div>
+                <div class="food-card famous">
+                    <span class="food-emoji">🍗</span>
+                    <div class="food-name">Bonchon Korean Chicken <span class="badge-famous">人氣</span></div>
+                    <span class="food-floor">M 樓 / Pier 21</span>
+                    <div class="food-desc">
+                        韓式脆皮炸雞，<strong>蒜醬甜辣</strong>、<strong>原味香蒜</strong>最受歡迎，
+                        外酥內嫩配啤酒超讚。
+                    </div>
+                    <div class="food-price">💰 280 - 450฿</div>
+                </div>
+                <div class="food-card">
+                    <span class="food-emoji">🥩</span>
+                    <div class="food-name">Sizzler</div>
+                    <span class="food-floor">3F · 舊金山層</span>
+                    <div class="food-desc">
+                        平價美式牛排館，沙拉吧吃到飽，<strong>加 40฿ 升級沙拉吧</strong>是定番操作。
+                    </div>
+                    <div class="food-price">💰 300 - 550฿</div>
+                </div>
+                <div class="food-card">
+                    <span class="food-emoji">🥘</span>
+                    <div class="food-name">Mo-Mo Paradise 日式涮涮鍋</div>
+                    <span class="food-floor">2F · 東京層</span>
+                    <div class="food-desc">
+                        日式吃到飽涮涮鍋，壽喜燒、豚肉鍋、和牛加價都有，時限 90 分鐘。
+                    </div>
+                    <div class="food-price">💰 499 - 799฿ / 人</div>
+                </div>
+                <div class="food-card">
+                    <span class="food-emoji">🍵</span>
+                    <div class="food-name">ChaTraMue 手標茶</div>
+                    <span class="food-floor">M 樓 / Pier 21</span>
+                    <div class="food-desc">
+                        招牌橘色泰式奶茶 <strong>55฿</strong> 一杯，快速補糖首選。
+                        逛街累了來一杯剛好。
+                    </div>
+                    <div class="food-price">💰 45 - 85฿</div>
+                </div>
+                <div class="food-card">
+                    <span class="food-emoji">🍦</span>
+                    <div class="food-name">Swensen's 冰淇淋</div>
+                    <span class="food-floor">G 樓 · 巴黎層</span>
+                    <div class="food-desc">
+                        泰國連鎖冰淇淋聖代店，<strong>芒果糯米聖代</strong>、
+                        <strong>起司蛋糕聖代</strong>是在地人最愛。
+                    </div>
+                    <div class="food-price">💰 150 - 290฿</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🛍️ 逛街重點</h2>
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <strong>💄 美妝保養</strong>
+                    Mistine、Beauty Buffet、Boots 泰國美妝三大品牌都有，伴手禮必買。
+                </div>
+                <div class="tip-card">
+                    <strong>👕 平價服飾</strong>
+                    H&M、Uniqlo、Zara 都進駐，比台灣略便宜 10-20%。
+                </div>
+                <div class="tip-card">
+                    <strong>🎁 泰國特色</strong>
+                    Jim Thompson（泰絲）、NARAYA（繡花包）在 2F 有專櫃，適合送禮。
+                </div>
+                <div class="tip-card">
+                    <strong>📱 3C 電器</strong>
+                    3F 有 iStudio、Samsung 等 3C 店，可比價（泰國 iPhone 常比台灣貴）。
+                </div>
+                <div class="tip-card">
+                    <strong>🧴 超市</strong>
+                    B2 有 Gourmet Market 超市，泰式零食、調味料、水果伴手禮都能買齊。
+                </div>
+                <div class="tip-card">
+                    <strong>🎬 電影院</strong>
+                    3F 有 Major Cineplex，有興趣可看場泰國電影體驗當地文化。
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⏰ 營業資訊</h2>
+            <div class="info-row">
+                <div class="info-label">🕐 營業時間</div>
+                <div class="info-value">每日 11:00 - 23:00（餐廳部分到 22:00）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📍 地址</div>
+                <div class="info-value">777 Moo 6, North Pattaya Rd., Chonburi</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🚗 停車</div>
+                <div class="info-value">免費停車場（B2、B3）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💳 付款</div>
+                <div class="info-value">現金、信用卡、行動支付</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🌐 WiFi</div>
+                <div class="info-value">全館免費 WiFi</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💵 退稅</div>
+                <div class="info-value">部分商店可外國人 VAT 退稅（單筆滿 2,000฿）</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 逛街小撇步</h2>
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <strong>🍽️ 午晚餐避開尖峰</strong>
+                    Pier 21 美食街 12:00-13:00、18:30-19:30 超多人，可提早或延後。
+                </div>
+                <div class="tip-card">
+                    <strong>📸 廁所別錯過</strong>
+                    每層廁所都是該主題設計，拍照打卡熱點。
+                </div>
+                <div class="tip-card">
+                    <strong>🎫 美食街點餐</strong>
+                    先在入口櫃檯儲值悠遊卡，到各攤刷卡點餐，離場退未用金額。
+                </div>
+                <div class="tip-card">
+                    <strong>☀️ 雨備首選</strong>
+                    下雨或太熱時來 Terminal 21 吹冷氣逛一整天超舒服。
+                </div>
+                <div class="tip-card">
+                    <strong>🛒 大採購放最後</strong>
+                    逛街期間先記價格，最後一天來大採購免得搬很重。
+                </div>
+                <div class="tip-card">
+                    <strong>📲 退稅單</strong>
+                    滿 2,000฿ 結帳時向店員索取退稅單（Tax Refund Form），機場辦理退稅。
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🔗 查詢與導航</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-primary" href="https://www.google.com/maps/search/Terminal+21+Pattaya" target="_blank">
+                    📍 查看地圖
+                </a>
+                <a class="btn btn-outline" href="https://www.google.com/search?q=Terminal+21+Pattaya" target="_blank">
+                    🔍 Google 搜尋
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

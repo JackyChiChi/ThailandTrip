@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>綠山野生動物園 Khao Kheow Open Zoo | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --thai-gold: #FFD700;
+            --thai-orange: #FF8C42;
+            --thai-red: #DC143C;
+            --thai-green: #228B22;
+            --leaf-green: #43A047;
+            --deep-green: #1B5E20;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #2C1810;
+            --text-medium: #5D4E37;
+            --gradient-sunset: linear-gradient(135deg, var(--thai-orange), var(--thai-red));
+            --gradient-forest: linear-gradient(135deg, var(--leaf-green), var(--deep-green));
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-forest);
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.3rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .title-en {
+            font-size: 1rem;
+            letter-spacing: 2px;
+            opacity: 0.9;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--leaf-green);
+        }
+
+        .section h2 {
+            color: var(--deep-green);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--leaf-green);
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .stat-card {
+            background: var(--soft-cream);
+            padding: 1rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(67, 160, 71, 0.25);
+        }
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--deep-green);
+            display: block;
+        }
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            margin-top: 0.2rem;
+        }
+
+        .highlight-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .highlight-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1rem;
+            border: 1px solid rgba(67, 160, 71, 0.25);
+            transition: transform 0.3s ease;
+        }
+        .highlight-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(67, 160, 71, 0.25);
+        }
+        .highlight-card.star {
+            background: linear-gradient(135deg, #FFF8E1, #FFE082);
+            border: 2px solid var(--thai-gold);
+        }
+        .dish-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .dish-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.25rem;
+            font-size: 1.05rem;
+        }
+        .dish-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+        .dish-price {
+            margin-top: 0.5rem;
+            font-weight: 600;
+            color: var(--deep-green);
+            font-size: 0.9rem;
+        }
+        .badge-signature {
+            display: inline-block;
+            background: var(--thai-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .ticket-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .ticket-card {
+            background: linear-gradient(135deg, #FFFFFF, var(--soft-cream));
+            border-radius: 14px;
+            padding: 1.2rem;
+            text-align: center;
+            border: 2px dashed var(--leaf-green);
+        }
+        .ticket-title {
+            font-weight: 600;
+            color: var(--deep-green);
+            margin-bottom: 0.5rem;
+        }
+        .ticket-price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--thai-red);
+        }
+        .ticket-sub {
+            font-size: 0.8rem;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+        }
+
+        .zone-list {
+            list-style: none;
+            padding: 0;
+            margin-top: 0.5rem;
+        }
+        .zone-list li {
+            padding: 0.6rem 0.8rem;
+            margin-bottom: 0.4rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+            display: flex;
+            gap: 0.6rem;
+            align-items: flex-start;
+            font-size: 0.92rem;
+        }
+        .zone-icon {
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.75rem 1.4rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-forest);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(27, 94, 32, 0.35);
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--leaf-green);
+            border: 2px solid var(--leaf-green);
+        }
+        .btn-outline:hover {
+            background: var(--leaf-green);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--thai-gold);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        .warning {
+            background: #FFEBEE;
+            border-left: 4px solid var(--thai-red);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.6rem 0;
+            border-bottom: 1px dashed rgba(67, 160, 71, 0.2);
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: var(--deep-green);
+            min-width: 90px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--text-medium);
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.7rem; }
+            .title-en { font-size: 0.85rem; }
+            .logo { font-size: 3rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+            .ticket-price { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">🦒</div>
+        <h1 class="title">綠山野生動物園</h1>
+        <div class="title-en">KHAO KHEOW OPEN ZOO</div>
+        <p class="tagline">泰國最大開放式動物園 · 芭達雅必訪親子景點</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於綠山動物園</h2>
+            <p>
+                綠山動物園（Khao Kheow Open Zoo）位於春武里府，距離芭達雅約
+                <strong>45 分鐘車程</strong>，是泰國最大的開放式動物園。
+                園區採開放飼養模式，遊客可以乘車遊覽或步行深入自然棲息地，近距離觀察動物。
+            </p>
+            <p>
+                這裡不只是動物園，更像一座熱帶叢林公園 — 有超過 <strong>300 種、8,000 多隻動物</strong>，
+                包含許多罕見與瀕臨絕種物種。
+            </p>
+
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <span class="stat-number">2,000+</span>
+                    <div class="stat-label">公頃園區面積</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">300+</span>
+                    <div class="stat-label">動物種類</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">8,000+</span>
+                    <div class="stat-label">動物數量</div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">55 年</span>
+                    <div class="stat-label">開園歷史</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌟 必體驗亮點</h2>
+            <div class="highlight-grid">
+                <div class="highlight-card star">
+                    <span class="dish-emoji">🦒</span>
+                    <div class="dish-name">餵長頸鹿 <span class="badge-signature">招牌</span></div>
+                    <div class="dish-desc">
+                        買一把香蕉或樹葉，親手餵食高 5 公尺的長頸鹿，超療癒體驗！
+                    </div>
+                    <div class="dish-price">約 20-40฿ / 份</div>
+                </div>
+                <div class="highlight-card star">
+                    <span class="dish-emoji">🌙</span>
+                    <div class="dish-name">夜間遊園 <span class="badge-signature">特色</span></div>
+                    <div class="dish-desc">
+                        Night Safari 18:00-21:00，搭乘遊園車看夜行性動物活躍時刻。
+                    </div>
+                    <div class="dish-price">額外加價 250-350฿</div>
+                </div>
+                <div class="highlight-card">
+                    <span class="dish-emoji">🐘</span>
+                    <div class="dish-name">大象互動秀</div>
+                    <div class="dish-desc">
+                        泰國大象表演、餵食與合照，園區有定時展演。
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <span class="dish-emoji">🦏</span>
+                    <div class="dish-name">犀牛 / 河馬近距離</div>
+                    <div class="dish-desc">
+                        開放式圍欄可從車上伸手餵食，孩子們最愛的互動區。
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <span class="dish-emoji">🦁</span>
+                    <div class="dish-name">獅虎園區</div>
+                    <div class="dish-desc">
+                        白老虎、白獅、孟加拉虎，透過玻璃近距離觀賞。
+                    </div>
+                </div>
+                <div class="highlight-card">
+                    <span class="dish-emoji">🐧</span>
+                    <div class="dish-name">企鵝與水族館</div>
+                    <div class="dish-desc">
+                        室內區有冷氣，適合中午避暑休息。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🗺️ 園區分區</h2>
+            <p>園區分為多個主題區，建議至少預留 <strong>4-6 小時</strong>遊覽：</p>
+            <ul class="zone-list">
+                <li><span class="zone-icon">🦒</span><div><strong>非洲草原區</strong>：長頸鹿、斑馬、犀牛、瞪羚等</div></li>
+                <li><span class="zone-icon">🐘</span><div><strong>亞洲動物區</strong>：大象、犀牛、紅毛猩猩</div></li>
+                <li><span class="zone-icon">🦁</span><div><strong>猛獸區</strong>：獅子、老虎、花豹、美洲豹</div></li>
+                <li><span class="zone-icon">🐧</span><div><strong>鳥類與企鵝館</strong>：火烈鳥、企鵝、熱帶鳥類</div></li>
+                <li><span class="zone-icon">🦎</span><div><strong>爬蟲兩棲館</strong>：蟒蛇、巨蜥、鱷魚</div></li>
+                <li><span class="zone-icon">🌴</span><div><strong>熱帶雨林步道</strong>：自然生態步行區</div></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🎫 門票價格（現場票）</h2>
+            <div class="ticket-grid">
+                <div class="ticket-card">
+                    <div class="ticket-title">🧑 成人</div>
+                    <div class="ticket-price">280฿</div>
+                    <div class="ticket-sub">外國遊客價</div>
+                </div>
+                <div class="ticket-card">
+                    <div class="ticket-title">🧒 兒童</div>
+                    <div class="ticket-price">80฿</div>
+                    <div class="ticket-sub">身高 100-135cm</div>
+                </div>
+                <div class="ticket-card">
+                    <div class="ticket-title">🚐 遊園車</div>
+                    <div class="ticket-price">100฿</div>
+                    <div class="ticket-sub">可無限次搭乘</div>
+                </div>
+                <div class="ticket-card">
+                    <div class="ticket-title">🌙 夜間遊園</div>
+                    <div class="ticket-price">350฿</div>
+                    <div class="ticket-sub">18:00-21:00 額外加價</div>
+                </div>
+            </div>
+            <div class="note">
+                💡 <strong>Klook / KKday 常有優惠套票</strong>，含來回接駁+門票+餐點，通常比現場買划算。出發前可先比價。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⏰ 營業資訊</h2>
+            <div class="info-row">
+                <div class="info-label">🕐 開園時間</div>
+                <div class="info-value">日間 08:00 - 17:00（最後入園 16:00）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🌙 夜間遊園</div>
+                <div class="info-value">18:00 - 21:00（需另外購票）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📅 公休</div>
+                <div class="info-value">全年無休</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🅿️ 停車</div>
+                <div class="info-value">免費停車場</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🍴 餐飲</div>
+                <div class="info-value">園內有餐廳、小吃攤、咖啡廳</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💳 付款</div>
+                <div class="info-value">現金、信用卡、部分行動支付</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🚗 交通方式（從芭達雅出發）</h2>
+            <ul class="zone-list">
+                <li><span class="zone-icon">🚕</span><div><strong>包車 / Grab</strong>：最方便，單程約 45 分鐘、700-900฿（來回建議包車）</div></li>
+                <li><span class="zone-icon">🎟️</span><div><strong>Klook / KKday 一日遊</strong>：含接送+門票+導覽，約 1,200-1,800฿/人</div></li>
+                <li><span class="zone-icon">🚐</span><div><strong>雙條車</strong>：便宜但要多次轉車，不建議</div></li>
+            </ul>
+            <div class="warning">
+                ⚠️ <strong>注意</strong>：園區佔地極大，建議一進園區租電動車或搭遊園車，用步行會累死，且很多區域路途遙遠。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 實用小撇步</h2>
+            <ul class="zone-list">
+                <li><span class="zone-icon">☀️</span><div>準時開園時段（早上 8-10 點）最涼爽，動物也最活躍</div></li>
+                <li><span class="zone-icon">🧢</span><div>帽子、防曬、水、雨具必備（泰國雨季 6-10 月常午後雷陣雨）</div></li>
+                <li><span class="zone-icon">👟</span><div>穿好走的鞋子，園區會走很多路</div></li>
+                <li><span class="zone-icon">📷</span><div>相機 / 手機充飽電，拍照點超多</div></li>
+                <li><span class="zone-icon">🍼</span><div>有帶小孩可先詢問是否有嬰兒車租借</div></li>
+                <li><span class="zone-icon">💵</span><div>準備零錢買餵食飼料（20-40฿/份）</div></li>
+            </ul>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🌐 更多資源</h2>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-primary" href="https://www.kkopenzoo.com/" target="_blank">
+                    🌐 官方網站
+                </a>
+                <a class="btn btn-outline" href="https://www.google.com/maps/search/Khao+Kheow+Open+Zoo" target="_blank">
+                    📍 查看地圖
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>

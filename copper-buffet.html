@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Copper Beyond Buffet | 泰國之旅</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&family=Fredoka:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --copper: #B87333;
+            --copper-dark: #8B4513;
+            --copper-light: #D4A574;
+            --gold-shine: #E6B800;
+            --thai-red: #DC143C;
+            --warm-white: #FFF8E7;
+            --soft-cream: #F9F5E8;
+            --text-dark: #2C1810;
+            --text-medium: #5D4E37;
+            --gradient-copper: linear-gradient(135deg, #D4A574, #8B4513);
+            --gradient-gold: linear-gradient(135deg, #E6B800, #B87333);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            background: var(--warm-white);
+            color: var(--text-dark);
+            line-height: 1.7;
+        }
+
+        .page-header {
+            background: var(--gradient-copper);
+            padding: 3rem 1rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-header::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 30%, rgba(255,215,0,0.15), transparent 60%);
+            pointer-events: none;
+        }
+
+        .back-btn {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255,255,255,0.25);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            z-index: 1;
+        }
+        .back-btn:hover {
+            background: rgba(255,255,255,0.4);
+            transform: translateX(-3px);
+        }
+
+        .logo {
+            font-size: 4rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        .title {
+            font-family: 'Fredoka', cursive;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.35);
+            position: relative;
+            z-index: 1;
+        }
+        .title-en {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        .tagline {
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .booked-ribbon {
+            display: inline-block;
+            background: #4CAF50;
+            color: white;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-top: 0.8rem;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+        }
+
+        .container {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 1.75rem 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            border-left: 6px solid var(--copper);
+        }
+
+        .section h2 {
+            color: var(--copper-dark);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .section p {
+            color: var(--text-medium);
+            margin-bottom: 0.75rem;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2);
+            border-radius: 12px;
+            padding: 1rem 1.2rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--gold-shine);
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .price-card {
+            background: linear-gradient(135deg, #FFFFFF, #FFF8E1);
+            border-radius: 14px;
+            padding: 1.3rem 1rem;
+            text-align: center;
+            border: 2px solid var(--copper-light);
+            transition: all 0.3s ease;
+        }
+        .price-card.premium {
+            background: linear-gradient(135deg, #FFF8E1, #FFCC80);
+            border: 2px solid var(--gold-shine);
+            box-shadow: 0 5px 15px rgba(230, 184, 0, 0.3);
+        }
+        .price-title {
+            font-weight: 600;
+            color: var(--copper-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+        .price-amount {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--thai-red);
+        }
+        .price-amount .unit {
+            font-size: 1rem;
+            color: var(--text-medium);
+        }
+        .price-time {
+            font-size: 0.82rem;
+            color: var(--text-medium);
+            margin-top: 0.25rem;
+        }
+        .price-note {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-top: 0.4rem;
+            font-style: italic;
+        }
+
+        .station-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .station-card {
+            background: var(--soft-cream);
+            border-radius: 14px;
+            padding: 1.1rem;
+            border: 1px solid rgba(184, 115, 51, 0.25);
+            transition: transform 0.3s ease;
+        }
+        .station-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(184, 115, 51, 0.25);
+        }
+        .station-card.signature {
+            background: linear-gradient(135deg, #FFF3E0, #FFCC80);
+            border: 2px solid var(--copper);
+        }
+        .station-emoji {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.4rem;
+        }
+        .station-name {
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+            font-size: 1.05rem;
+        }
+        .station-desc {
+            font-size: 0.88rem;
+            color: var(--text-medium);
+        }
+        .badge-signature {
+            display: inline-block;
+            background: var(--thai-red);
+            color: white;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 10px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+
+        .menu-category {
+            margin-top: 1.5rem;
+        }
+        .menu-category h3 {
+            color: var(--copper);
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 2px dashed rgba(184, 115, 51, 0.3);
+        }
+        .menu-list {
+            list-style: none;
+            padding: 0;
+        }
+        .menu-list li {
+            padding: 0.55rem 0.8rem;
+            margin-bottom: 0.35rem;
+            background: var(--soft-cream);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            display: flex;
+            gap: 0.5rem;
+            align-items: flex-start;
+        }
+        .menu-list li .bullet {
+            color: var(--copper);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .info-row {
+            display: flex;
+            gap: 0.6rem;
+            padding: 0.7rem 0;
+            border-bottom: 1px dashed rgba(184, 115, 51, 0.2);
+        }
+        .info-row:last-child { border-bottom: none; }
+        .info-label {
+            font-weight: 600;
+            color: var(--copper-dark);
+            min-width: 95px;
+            flex-shrink: 0;
+        }
+        .info-value {
+            color: var(--text-medium);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 1.25rem;
+        }
+        .btn {
+            padding: 0.75rem 1.4rem;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+        .btn-primary {
+            background: var(--gradient-copper);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.4);
+        }
+        .btn-gold {
+            background: var(--gradient-gold);
+            color: white;
+        }
+        .btn-outline {
+            background: transparent;
+            color: var(--copper);
+            border: 2px solid var(--copper);
+        }
+        .btn-outline:hover {
+            background: var(--copper);
+            color: white;
+        }
+
+        .note {
+            background: #FFF8E1;
+            border-left: 4px solid var(--gold-shine);
+            padding: 0.8rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            color: var(--text-medium);
+            margin-top: 1rem;
+        }
+
+        .tip-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+        .tip-card {
+            background: var(--soft-cream);
+            padding: 0.9rem 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--copper);
+            font-size: 0.9rem;
+        }
+        .tip-card strong {
+            color: var(--copper-dark);
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .title { font-size: 1.8rem; }
+            .title-en { font-size: 0.85rem; }
+            .logo { font-size: 3rem; }
+            .section { padding: 1.25rem 1rem; }
+            .section h2 { font-size: 1.2rem; }
+            .back-btn { font-size: 0.8rem; padding: 0.4rem 0.8rem; }
+            .price-amount { font-size: 1.6rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="back-btn">← 返回行程</a>
+        <div class="logo">🦞</div>
+        <h1 class="title">Copper Beyond Buffet</h1>
+        <div class="title-en">GAYSORN AMARIN · BANGKOK</div>
+        <p class="tagline">曼谷頂級國際自助餐 · 龍蝦、生蠔、和牛無限供應</p>
+        <div class="booked-ribbon">✅ 已於 5/1 完成訂位</div>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>📖 關於 Copper Beyond Buffet</h2>
+            <p>
+                <strong>Copper</strong> 是曼谷頂級國際自助餐品牌，位於 <strong>Gaysorn Amarin</strong>（BTS Chit Lom 站），
+                以「<strong>超越一般 buffet</strong>」為訴求，提供 <strong>200 道以上</strong>精緻料理。
+            </p>
+            <p>
+                菜色橫跨 <strong>日式、泰式、中式、義式、海鮮燒烤</strong>等多國料理，
+                並主打頂級食材 — 龍蝦、生蠔、北海道干貝、壽喜燒、和牛串燒等。
+                每道都由主廚現場處理，品質與高級餐廳同級。
+            </p>
+            <div class="highlight-box">
+                🏆 <strong>TripAdvisor / Wongnai</strong> 曼谷自助餐排行榜常勝<br>
+                🦞 <strong>龍蝦 + 生蠔 + 和牛 + 干貝</strong>全部任吃<br>
+                ⏰ 用餐時間 <strong>1.5 小時</strong>（晚餐 2 小時），可無限回夾
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💰 價格方案</h2>
+            <div class="price-grid">
+                <div class="price-card">
+                    <div class="price-title">🍱 午餐 平日</div>
+                    <div class="price-amount">1,299<span class="unit">฿</span></div>
+                    <div class="price-time">11:30 - 14:30</div>
+                    <div class="price-note">週一至週五</div>
+                </div>
+                <div class="price-card">
+                    <div class="price-title">🍱 午餐 週末</div>
+                    <div class="price-amount">1,499<span class="unit">฿</span></div>
+                    <div class="price-time">11:30 - 14:30</div>
+                    <div class="price-note">週六、週日</div>
+                </div>
+                <div class="price-card premium">
+                    <div class="price-title">🦞 晚餐 平日</div>
+                    <div class="price-amount">1,899<span class="unit">฿</span></div>
+                    <div class="price-time">17:30 - 22:00</div>
+                    <div class="price-note">含龍蝦 + 和牛</div>
+                </div>
+                <div class="price-card premium">
+                    <div class="price-title">🦞 晚餐 週末</div>
+                    <div class="price-amount">2,099<span class="unit">฿</span></div>
+                    <div class="price-time">17:30 - 22:00</div>
+                    <div class="price-note">最豐盛</div>
+                </div>
+            </div>
+            <div class="note">
+                💡 以上為 HungryHub 優惠價參考，<strong>原價約貴 200-400฿</strong>。價格不含 10% 服務費 + 7% VAT。飲料另計。
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🌟 必吃招牌站</h2>
+            <div class="station-grid">
+                <div class="station-card signature">
+                    <span class="station-emoji">🦞</span>
+                    <div class="station-name">龍蝦 & 生蠔吧 <span class="badge-signature">招牌</span></div>
+                    <div class="station-desc">
+                        波士頓龍蝦半隻、法國吉拉多生蠔、冰鎮大蝦、北海道干貝 — 海鮮控的天堂。
+                    </div>
+                </div>
+                <div class="station-card signature">
+                    <span class="station-emoji">🥩</span>
+                    <div class="station-name">和牛燒烤站 <span class="badge-signature">必吃</span></div>
+                    <div class="station-desc">
+                        A5 和牛串燒、戰斧牛排、羊排、澳洲牛舌，現點現烤。
+                    </div>
+                </div>
+                <div class="station-card signature">
+                    <span class="station-emoji">🍣</span>
+                    <div class="station-name">日式壽司刺身</div>
+                    <div class="station-desc">
+                        鮭魚、鮪魚大腹、甜蝦、鰻魚壽司、手卷、軍艦 — 職人現做。
+                    </div>
+                </div>
+                <div class="station-card">
+                    <span class="station-emoji">🍲</span>
+                    <div class="station-name">泰式經典</div>
+                    <div class="station-desc">
+                        冬蔭功、咖哩螃蟹、打拋豬、泰式炒河粉、青木瓜沙拉。
+                    </div>
+                </div>
+                <div class="station-card">
+                    <span class="station-emoji">🥟</span>
+                    <div class="station-name">中式港點</div>
+                    <div class="station-desc">
+                        蝦餃、燒賣、叉燒包、流沙包、鳳爪、港式腸粉。
+                    </div>
+                </div>
+                <div class="station-card">
+                    <span class="station-emoji">🍕</span>
+                    <div class="station-name">義式窯烤</div>
+                    <div class="station-desc">
+                        手工披薩、義大利麵、燉飯、焗烤，搭配帕馬森起司。
+                    </div>
+                </div>
+                <div class="station-card">
+                    <span class="station-emoji">🍰</span>
+                    <div class="station-name">甜點吧 <span class="badge-signature">拍照</span></div>
+                    <div class="station-desc">
+                        法式甜點、馬卡龍、慕斯蛋糕、哈根達斯冰淇淋無限吃。
+                    </div>
+                </div>
+                <div class="station-card">
+                    <span class="station-emoji">🍹</span>
+                    <div class="station-name">飲品吧</div>
+                    <div class="station-desc">
+                        軟飲、鮮果汁、咖啡、熱茶（酒類另外計費）。
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📋 完整菜單概覽</h2>
+            <p style="font-size: 0.9rem;">每日約 <strong>200+ 道</strong>料理輪替，以下為常見品項：</p>
+
+            <div class="menu-category">
+                <h3>🦞 冷盤海鮮吧</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>波士頓龍蝦（半隻 / 整隻，依方案）</li>
+                    <li><span class="bullet">•</span>法國吉拉多生蠔、紐西蘭生蠔</li>
+                    <li><span class="bullet">•</span>冰鎮大蝦、阿拉斯加蟹腳</li>
+                    <li><span class="bullet">•</span>鮮甜北海道干貝</li>
+                    <li><span class="bullet">•</span>鮭魚 / 鮪魚生魚片</li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🥩 熱食燒烤</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>A5 和牛串燒、澳洲戰斧牛排</li>
+                    <li><span class="bullet">•</span>紐西蘭羊排、烤豬肋排</li>
+                    <li><span class="bullet">•</span>伊比利火腿、香腸拼盤</li>
+                    <li><span class="bullet">•</span>串燒拼盤（牛舌、雞心、青椒肉串）</li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍣 日式料理</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>握壽司、軍艦、手卷</li>
+                    <li><span class="bullet">•</span>烏龍麵、天婦羅</li>
+                    <li><span class="bullet">•</span>壽喜燒、涮涮鍋</li>
+                    <li><span class="bullet">•</span>炙燒鮭魚、鮭魚親子丼</li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍲 泰式料理</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>咖哩炒蟹（限量）</li>
+                    <li><span class="bullet">•</span>冬蔭功湯、酸辣海鮮湯</li>
+                    <li><span class="bullet">•</span>打拋豬、綠咖哩雞</li>
+                    <li><span class="bullet">•</span>泰式炒河粉、青木瓜沙拉</li>
+                    <li><span class="bullet">•</span>泰式烤豬頸肉、酥炸春捲</li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🥟 中式 / 港式</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>蝦餃、燒賣、鳳爪</li>
+                    <li><span class="bullet">•</span>叉燒包、流沙包</li>
+                    <li><span class="bullet">•</span>港式腸粉、XO 醬炒蘿蔔糕</li>
+                    <li><span class="bullet">•</span>北京烤鴨、叉燒拼盤</li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍕 義式 / 西式</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>手工窯烤披薩（瑪格麗特、海鮮、肉類）</li>
+                    <li><span class="bullet">•</span>各式義大利麵（番茄、白醬、松露）</li>
+                    <li><span class="bullet">•</span>焗烤千層麵、燉飯</li>
+                    <li><span class="bullet">•</span>沙拉吧（配料 20 款以上）</li>
+                </ul>
+            </div>
+
+            <div class="menu-category">
+                <h3>🍰 甜點 & 飲品</h3>
+                <ul class="menu-list">
+                    <li><span class="bullet">•</span>哈根達斯冰淇淋多種口味</li>
+                    <li><span class="bullet">•</span>法式甜點（慕斯、馬卡龍、塔類）</li>
+                    <li><span class="bullet">•</span>泰式甜品（芒果糯米飯、椰奶糕）</li>
+                    <li><span class="bullet">•</span>巧克力瀑布 + 水果沾醬</li>
+                    <li><span class="bullet">•</span>果汁、氣泡水、熱飲無限</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>📍 地點與營業資訊</h2>
+            <div class="info-row">
+                <div class="info-label">🏢 位置</div>
+                <div class="info-value">Gaysorn Amarin 商場 2F（BTS Chit Lom 站步行 2 分鐘）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🕐 午餐</div>
+                <div class="info-value">11:30 - 14:30（最後入場 13:30）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">🕐 晚餐</div>
+                <div class="info-value">17:30 - 22:00（最後入場 20:30）</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">⏰ 用餐時限</div>
+                <div class="info-value">午餐 1.5 小時｜晚餐 2 小時</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">📞 訂位</div>
+                <div class="info-value"><strong style="color: var(--thai-red);">強烈建議提前訂位</strong>，週末與節日常常客滿</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">💳 付款</div>
+                <div class="info-value">現金、信用卡、Apple Pay / Google Pay</div>
+            </div>
+            <div class="info-row">
+                <div class="info-label">👚 穿著</div>
+                <div class="info-value">Smart Casual（不用正裝但避免短褲拖鞋）</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>💡 用餐小撇步</h2>
+            <div class="tip-grid">
+                <div class="tip-card">
+                    <strong>🦞 先攻海鮮</strong>
+                    龍蝦、生蠔、干貝優先夾，這些是最貴最值的品項。
+                </div>
+                <div class="tip-card">
+                    <strong>🥩 再吃燒烤</strong>
+                    和牛串燒現烤需要時間，建議先點單邊夾其他食物。
+                </div>
+                <div class="tip-card">
+                    <strong>🍣 壽司新鮮度</strong>
+                    壽司師傅現做最好吃，看到有人點就順便夾。
+                </div>
+                <div class="tip-card">
+                    <strong>🍚 少吃澱粉</strong>
+                    飯、麵、披薩會佔空間，盡量吃高單價食材。
+                </div>
+                <div class="tip-card">
+                    <strong>🍰 甜點最後</strong>
+                    留一點胃給哈根達斯和法式甜點。
+                </div>
+                <div class="tip-card">
+                    <strong>📸 拍照打卡</strong>
+                    海鮮台拼盤拍起來超豪華，記得先拍再吃。
+                </div>
+            </div>
+        </div>
+
+        <div class="section" style="text-align: center;">
+            <h2 style="justify-content: center;">🔗 訂位與資訊</h2>
+            <p style="font-size: 0.9rem; margin-bottom: 1rem;">已於 5/1 完成訂位，若需修改可至 HungryHub 查詢。</p>
+            <div class="cta-buttons" style="justify-content: center;">
+                <a class="btn btn-gold" href="https://web.hungryhub.com/zh_hant/restaurants/copper-beyond-buffet-gaysorn-amarin-hungry-hub-bangkok/web" target="_blank">
+                    🍽️ HungryHub 訂位查詢
+                </a>
+                <a class="btn btn-primary" href="https://www.google.com/maps/search/Copper+Beyond+Buffet+Gaysorn+Amarin" target="_blank">
+                    📍 查看地圖
+                </a>
+                <a class="btn btn-outline" href="index.html">
+                    ← 返回行程
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        (function() {
+            const from = new URLSearchParams(window.location.search).get('from');
+            if (from && /^day[1-6]$/.test(from)) {
+                document.querySelectorAll('a[href="index.html"]').forEach(a => {
+                    a.href = 'index.html#' + from;
+                });
+            }
+        })();
+    </script>
+</body>
+</html>
