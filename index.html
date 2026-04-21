@@ -539,18 +539,38 @@
             .title {
                 font-size: 2rem;
             }
-            
+
             .countdown-weather {
                 gap: 1rem;
             }
-            
+
             .activity-header {
                 flex-direction: column;
                 gap: 0.5rem;
             }
-            
+
             .action-buttons {
                 justify-content: center;
+            }
+
+            .header-info {
+                position: static;
+                background: var(--gradient-sunset);
+                padding: 1.5rem 1rem 1.25rem;
+            }
+            .cover-banner::before {
+                display: none;
+            }
+            .title {
+                text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            }
+            .subtitle {
+                text-shadow: none;
+            }
+            .countdown-box, .weather-box {
+                background: rgba(255, 255, 255, 0.2);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+                box-shadow: none;
             }
         }
     </style>
