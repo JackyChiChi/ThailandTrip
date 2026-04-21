@@ -37,10 +37,41 @@
 
         .page-header {
             background: var(--gradient-sunset);
-            padding: 2rem 1rem;
             text-align: center;
             position: relative;
             overflow: hidden;
+        }
+
+        .cover-banner {
+            width: 100%;
+            position: relative;
+            line-height: 0;
+        }
+        .cover-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .cover-banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 35%;
+            background: linear-gradient(180deg, rgba(44, 24, 16, 0.65) 0%, rgba(44, 24, 16, 0.3) 60%, transparent 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .header-info {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 1.5rem 1rem 1rem;
+            z-index: 2;
+            line-height: 1.6;
         }
 
         .page-header::before {
@@ -65,15 +96,16 @@
             font-weight: 600;
             color: white;
             margin-bottom: 0.5rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 2px 6px rgba(0,0,0,0.75), 0 0 18px rgba(0,0,0,0.4);
             position: relative;
             z-index: 1;
         }
 
         .subtitle {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255,255,255,0.95);
             font-size: 1.1rem;
             margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.7);
             position: relative;
             z-index: 1;
         }
@@ -89,12 +121,14 @@
         }
 
         .countdown-box, .weather-box {
-            background: rgba(255,255,255,0.2);
+            background: rgba(0, 0, 0, 0.4);
             padding: 1rem;
             border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.3);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.35);
             min-width: 150px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
 
         .countdown-number {
@@ -439,6 +473,68 @@
         .type-book { background: #ec407a; color: white; }
         .type-bar { background: #6d4c41; }
 
+        .icon-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        .icon-card {
+            background: linear-gradient(135deg, #fff8e7 0%, #ffe0b2 100%);
+            border-radius: 18px;
+            padding: 1.25rem 0.75rem;
+            text-align: center;
+            border: 2px solid rgba(255, 140, 66, 0.25);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .icon-card:hover {
+            transform: translateY(-4px) scale(1.03);
+            box-shadow: 0 10px 25px rgba(255, 140, 66, 0.25);
+            border-color: var(--thai-orange);
+        }
+        .icon-card .emoji {
+            font-size: 3rem;
+            display: block;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.1));
+        }
+        .icon-card .icon {
+            width: 72px;
+            height: 72px;
+            display: block;
+            margin: 0 auto 0.5rem;
+            filter: drop-shadow(2px 3px 3px rgba(0,0,0,0.15));
+        }
+        .icon-card.photo {
+            padding: 0;
+            overflow: hidden;
+            background: white;
+        }
+        .icon-card.photo .illustration {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            display: block;
+        }
+        .icon-card.photo .caption {
+            padding: 0.6rem 0.5rem 0.1rem;
+        }
+        .icon-card.photo .sub {
+            padding: 0 0.5rem 0.7rem;
+        }
+        .icon-card .caption {
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+        .icon-card .sub {
+            font-size: 0.75rem;
+            color: var(--text-medium);
+            margin-top: 0.2rem;
+        }
+
         @media (max-width: 768px) {
             .title {
                 font-size: 2rem;
@@ -461,6 +557,10 @@
 </head>
 <body>
     <header class="page-header">
+        <div class="cover-banner">
+            <img src="images/Cover.png" alt="泰國之旅封面">
+        </div>
+        <div class="header-info">
         <h1 class="title">🇹🇭 泰國芭達雅+曼谷之旅</h1>
         <p class="subtitle">2026年6月18日 - 6月23日 | 6天5夜精彩行程</p>
         
@@ -479,6 +579,7 @@
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </header>
 
@@ -1100,14 +1201,35 @@
                         <div class="activity-time">早上</div>
                         <div>
                             <div class="activity-title"><span class="type-tag type-hotel">飯店</span>早上自由活動</div>
-                            <div class="activity-location">📍 曼谷飯店</div>
+                            <div class="activity-location">📍 曼谷飯店｜依心情選一個放鬆一下</div>
                         </div>
                     </div>
-                    <div class="options">
-                        <div class="option"><label>• 睡到自然醒 or 飯店泳池玩水拍照</label></div>
-                        <div class="option"><label>• or 按摩</label></div>
-                        <div class="option"><label>• or 逛街</label></div>
-                        <div class="option"><label>• or 採購</label></div>
+                    <div class="icon-grid">
+                        <div class="icon-card photo">
+                            <img class="illustration" src="images/Day5_dog1.png" alt="睡到自然醒的巴哥">
+                            <div class="caption">睡到自然醒</div>
+                            <div class="sub">補眠充電</div>
+                        </div>
+                        <div class="icon-card photo">
+                            <img class="illustration" src="images/Day5_dog2.png" alt="飯店泳池的巴哥">
+                            <div class="caption">飯店泳池</div>
+                            <div class="sub">玩水拍照</div>
+                        </div>
+                        <div class="icon-card photo">
+                            <img class="illustration" src="images/Day5_dog3.png" alt="按摩中的巴哥">
+                            <div class="caption">按摩</div>
+                            <div class="sub">舒壓放鬆</div>
+                        </div>
+                        <div class="icon-card photo">
+                            <img class="illustration" src="images/Day5_dog4.png" alt="逛街的巴哥">
+                            <div class="caption">逛街</div>
+                            <div class="sub">最後血拼</div>
+                        </div>
+                        <div class="icon-card photo">
+                            <img class="illustration" src="images/Day5_dog5.png" alt="採購中的巴哥">
+                            <div class="caption">採購</div>
+                            <div class="sub">伴手禮</div>
+                        </div>
                     </div>
                 </div>
 
